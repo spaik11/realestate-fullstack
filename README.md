@@ -1,2 +1,2 @@
-# TruZilla
+# TruZillow
 Real Estate App
