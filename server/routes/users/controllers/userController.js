@@ -12,7 +12,7 @@ module.exports = {
     const { username, email, password } = req.body;
 
     try {
-      let createdUser = await new User({
+      let createdUser = new User({
         email,
         password,
         username,
@@ -23,6 +23,14 @@ module.exports = {
       createdUser.password = hashedPassword;
 
       await createdUser.save();
+
+      let jwtToken = jetTokenIssue(user);
+
+      res.cookie("jwt-cookie-expense", jwtToken, {
+        expires: new Date(Date.now() + 36000 * 60 * 24),
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+      });
 
       res.json({
         message: "User created",
@@ -50,7 +58,7 @@ module.exports = {
           let jwtToken = jwtTokenIssue(foundUser);
 
           res.cookie("jwt-cookie-expense", jwtToken, {
-            expires: new Date(Date.now() + 36000),
+            expires: new Date(Date.now() + 36000 * 60 * 24),
             httpOnly: false,
             secure: process.env.NODE_ENV === "production" ? true : false,
           });
@@ -70,5 +78,20 @@ module.exports = {
   logout: (req, res) => {
     res.clearCookie("jwt-cookie-expense");
     res.end();
+  },
+  addToFavorites: async (req, res) => {
+    try {
+      let user = await User.findById({ _id: req.body.id });
+      let property = req.params.id;
+
+      user.favorites.push(property);
+      user.save();
+
+      res.json({ message: "Added to favorites!" });
+    } catch (error) {
+      res.status(500).json({
+        message: getErrorMessage(error),
+      });
+    }
   },
 };
