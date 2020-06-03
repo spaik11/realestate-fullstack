@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 
@@ -23,10 +24,20 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            TruZillow
+            <NavLink style={{ color: "white" }} to="/" exact>
+              TruZillow
+            </NavLink>
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          <Button color="inherit">
+            <NavLink style={{ color: "white" }} to="/login" exact>
+              Login
+            </NavLink>
+          </Button>
+          <Button color="inherit">
+            <NavLink style={{ color: "white" }} to="/register" exact>
+              Register
+            </NavLink>
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
