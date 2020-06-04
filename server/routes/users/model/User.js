@@ -27,6 +27,9 @@ const UserSchema = new mongoose.Schema({
   favorites: {
     type: Array,
   },
+  creditScore: {
+    type: Number,
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

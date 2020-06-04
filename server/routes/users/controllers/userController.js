@@ -23,8 +23,9 @@ module.exports = {
       createdUser.password = hashedPassword;
 
       await createdUser.save();
+      console.log(createdUser);
 
-      let jwtToken = jetTokenIssue(user);
+      let jwtToken = jwtTokenIssue(createdUser);
 
       res.cookie("jwt-cookie-expense", jwtToken, {
         expires: new Date(Date.now() + 36000 * 60 * 24),
@@ -36,6 +37,7 @@ module.exports = {
         message: "User created",
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: getErrorMessage(error),
       });
