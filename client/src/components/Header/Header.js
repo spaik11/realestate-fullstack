@@ -29,6 +29,11 @@ export default function ButtonAppBar() {
             </NavLink>
           </Typography>
           <Button color="inherit">
+            <NavLink style={{ color: "white" }} to="/map" exact>
+              Search
+            </NavLink>
+          </Button>
+          <Button color="inherit">
             <NavLink style={{ color: "white" }} to="/login" exact>
               Login
             </NavLink>
