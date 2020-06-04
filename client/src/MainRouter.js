@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-const Landing = React.lazy(() => import("./components/Landing/Landing"));
-const MapPage = React.lazy(() => import("./components/MapPage/MapPage"));
 
+const MapPage = React.lazy(() => import("./components/MapPage/MapPage"));
+const Landing = React.lazy(() => import("./components/Landing/Landing"));
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Register = React.lazy(() => import("./components/Register/Register"));
 
