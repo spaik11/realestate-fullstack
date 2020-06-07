@@ -56,27 +56,36 @@ export default function ButtonAppBar(props) {
             <AppBar position="static">
               <Toolbar>
                 <Typography variant="h6" className={classes.title}>
-                  <NavLink style={{ color: "white" }} to="/" exact>
+                  <NavLink
+                    style={{ color: "white", textDecoration: "none" }}
+                    to="/"
+                    exact>
                     TruZillow
                   </NavLink>
                 </Typography>
                 {user && auth ? (
                   <>
                     <Button color="inherit" key="1">
-                      <NavLink style={{ color: "white" }} to="/map" exact>
+                      <NavLink
+                        style={{ color: "white", textDecoration: "none" }}
+                        to="/map"
+                        exact>
                         Search
                       </NavLink>
                     </Button>
                     <Button color="inherit">
                       <NavLink
-                        style={{ color: "white" }}
+                        style={{ color: "white", textDecoration: "none" }}
                         to="/user-profile"
                         exact>
                         {user.username.toUpperCase()}
                       </NavLink>
                     </Button>
                     <Button color="inherit" onClick={logUserOut}>
-                      <NavLink style={{ color: "white" }} to="/" exact>
+                      <NavLink
+                        style={{ color: "white", textDecoration: "none" }}
+                        to="/"
+                        exact>
                         Log Out
                       </NavLink>
                     </Button>
@@ -84,12 +93,18 @@ export default function ButtonAppBar(props) {
                 ) : (
                   <>
                     <Button color="inherit">
-                      <NavLink style={{ color: "white" }} to="/login" exact>
+                      <NavLink
+                        style={{ color: "white", textDecoration: "none" }}
+                        to="/login"
+                        exact>
                         Login
                       </NavLink>
                     </Button>
                     <Button color="inherit">
-                      <NavLink style={{ color: "white" }} to="/register" exact>
+                      <NavLink
+                        style={{ color: "white", textDecoration: "none" }}
+                        to="/register"
+                        exact>
                         Register
                       </NavLink>
                     </Button>
