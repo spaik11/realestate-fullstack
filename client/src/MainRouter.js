@@ -4,6 +4,8 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Consumer } from "./components/Context/UserContext";
 
+import "./MainRouter.css"
+
 const MapPage = React.lazy(() => import("./components/MapPage/MapPage"));
 const Landing = React.lazy(() => import("./components/Landing/Landing"));
 const Login = React.lazy(() => import("./components/Login/Login"));
@@ -28,6 +30,18 @@ export default class MainRouter extends Component {
           );
         }}
       </Consumer>
+      <div id="app">
+        <Header />
+        <div id="middle">
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/register" exact component={Register} />
+          <Route path="/" exact component={Landing} />
+          <Route path="/map" exact component={MapPage} />
+        </Switch>
+        </div>
+        <Footer />
+      </div>
     );
   }
 }

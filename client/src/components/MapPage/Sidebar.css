@@ -1,0 +1,20 @@
+#properties {
+    height: 95%;
+}
+
+#nested-list-subheader {
+    background-color: rgb(211, 211, 211);
+    font-size: 20px;
+    color: white;
+    /* try commenting out the color and see if you which you like better */
+}
+
+#favList {
+    max-height: 300px;
+    overflow: scroll;
+}
+
+#allList {
+    max-height: 300px;
+    overflow: scroll;
+}
