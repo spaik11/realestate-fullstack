@@ -36,10 +36,9 @@ module.exports = {
       res.json({
         message: "User created",
       });
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
       res.status(500).json({
-        message: getErrorMessage(error),
+        message: getErrorMessage(e),
       });
     }
   },
@@ -71,9 +70,9 @@ module.exports = {
           res.json({ user: foundUser });
         }
       }
-    } catch (error) {
+    } catch (e) {
       res.status(500).json({
-        message: getErrorMessage(error),
+        message: getErrorMessage(e),
       });
     }
   },
@@ -90,9 +89,23 @@ module.exports = {
       user.save();
 
       res.json({ message: "Added to favorites!" });
-    } catch (error) {
+    } catch (e) {
       res.status(500).json({
-        message: getErrorMessage(error),
+        message: getErrorMessage(e),
+      });
+    }
+  },
+  updateProfile: async (req, res) => {
+    try {
+      const user = req.body._id;
+      let updatedUser = await User.findByIdAndUpdate({ _id: user }, req.body, {
+        new: true,
+      });
+
+      res.json(updatedUser);
+    } catch (e) {
+      res.status(500).json({
+        message: getErrorMessage(e),
       });
     }
   },
