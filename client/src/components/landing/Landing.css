@@ -1,5 +1,7 @@
 .landing {
-    height: 100vh;
+    display: inline-flex;
+    width: 100vw;
+    margin: 5px;
     background-image: url('./austin-texas.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -10,6 +12,6 @@
 
 .slogan {
     color: whitesmoke;
-    background-color: black;
-    padding: 20px;
+    background-color: rgb(0, 0, 0, .5);
+    padding: 10px 15px;
 }
