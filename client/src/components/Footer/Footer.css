@@ -1,5 +1,6 @@
 .footer {
     display: flex;
+    font-size: 10px;
     align-items: center;
     height: 45px;
     text-align: left;
