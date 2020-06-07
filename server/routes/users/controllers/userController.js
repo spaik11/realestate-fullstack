@@ -97,7 +97,7 @@ module.exports = {
   },
   updateProfile: async (req, res) => {
     try {
-      const user = req.body._id;
+      let user = req.body.id;
       let updatedUser = await User.findByIdAndUpdate({ _id: user }, req.body, {
         new: true,
       });
