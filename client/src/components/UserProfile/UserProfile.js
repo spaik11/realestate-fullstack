@@ -151,6 +151,7 @@ export default function UserProfile() {
 
     try {
       await updateUser({
+        id: user.id,
         username: username.value,
         email: email.value,
         password: password.value,
