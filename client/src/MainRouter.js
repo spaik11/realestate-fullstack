@@ -10,6 +10,9 @@ const MapPage = React.lazy(() => import("./components/MapPage/MapPage"));
 const Landing = React.lazy(() => import("./components/Landing/Landing"));
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Register = React.lazy(() => import("./components/Register/Register"));
+const UserProfile = React.lazy(() =>
+  import("./components/UserProfile/UserProfile")
+);
 
 export default class MainRouter extends Component {
   render() {
@@ -23,8 +26,9 @@ export default class MainRouter extends Component {
                 <Switch>
                   <Route path="/login" exact component={Login} />
                   <Route path="/register" exact component={Register} />
-                  <Route path="/" exact component={Landing} />
+                  <Route path="/user-profile" exact component={UserProfile} />
                   <Route path="/map" exact component={MapPage} />
+                  <Route path="/" exact component={Landing} />
                 </Switch>
               </div>
               <Footer />
