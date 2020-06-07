@@ -19,12 +19,6 @@ export default function UserProfile() {
       value: "",
       error: { message: "", noError: null },
     },
-    email: {
-      name: "email",
-      placeholder: user.email,
-      value: "",
-      error: { message: "", noError: null },
-    },
     password: {
       name: "password",
       placeholder: "Enter Password",
@@ -43,19 +37,12 @@ export default function UserProfile() {
       noError: true,
       message: "",
     },
-    emailError: {
-      noError: true,
-      message: "",
-    },
     passwordError: {
       noError: true,
       message: "",
     },
   });
   const [canSubmit, setCanSubmit] = useState(false);
-
-  console.log("USER PROFILE 1", user);
-  console.log("USER PROFILE 2", auth);
 
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
@@ -73,19 +60,6 @@ export default function UserProfile() {
         } else {
           errorState.usernameError.message = "";
           errorState.usernameError.noError = false;
-          return errorState;
-        }
-
-      case "email":
-        let isEmail = validator.isEmail(inputValue);
-
-        if (!isEmail) {
-          errorState.emailError.message = "Please enter a valid email";
-          errorState.emailError.noError = true;
-          return errorState;
-        } else {
-          errorState.emailError.message = "";
-          errorState.emailError.noError = false;
           return errorState;
         }
 
@@ -125,7 +99,6 @@ export default function UserProfile() {
     );
 
     inputForm["username"].error = isValidatedCheck.usernameError;
-    inputForm["email"].error = isValidatedCheck.emailError;
     inputForm["password"].error = isValidatedCheck.passwordError;
 
     setValidate({ ...validate, isValidatedCheck });
@@ -147,13 +120,12 @@ export default function UserProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, email, password } = formSetting;
+    const { username, password } = formSetting;
 
     try {
       await updateUser({
         id: user.id,
         username: username.value,
-        email: email.value,
         password: password.value,
       });
 
@@ -162,11 +134,20 @@ export default function UserProfile() {
       };
 
       inputForm["username"].value = "";
-      inputForm["email"].value = "";
       inputForm["password"].value = "";
 
       setFormSetting({
         ...formSetting,
+      });
+
+      toast.success(`User Updated!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     } catch (err) {
       toast.error(err.message, {
