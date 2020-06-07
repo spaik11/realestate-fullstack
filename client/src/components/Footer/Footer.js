@@ -4,7 +4,7 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <div className="footer">
-      <h3>&copy; Paul Garay & Sung Paik | Code Immersives</h3>
+      <p>&copy; Paul Garay & Sung Paik | Code Immersives</p>
     </div>
   );
 };
