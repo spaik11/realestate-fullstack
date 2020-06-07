@@ -55,3 +55,14 @@ export const logout = async () => {
     throw Error(e.response.data.message);
   }
 };
+
+export const updateUser = async (userInfo) => {
+  try {
+    let { data } = await Axios.put("/api/users/update-profile", userInfo, {
+      withCredentials: true,
+    });
+    return data;
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};

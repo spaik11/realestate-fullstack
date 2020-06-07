@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import validator from "validator";
-import { createUser } from "../../lib/Helpers/AuthHelpers";
+import { createUser, loginUser } from "../../lib/Helpers/AuthHelpers";
 import { Consumer } from "../Context/UserContext";
 import "./Register.css";
 
@@ -132,7 +132,7 @@ export default function Register(props) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, dispatch) => {
     e.preventDefault();
 
     const { username, email, password } = formSetting;
@@ -148,6 +148,16 @@ export default function Register(props) {
         ...formSetting,
       };
 
+      let success = await loginUser({
+        email: email.value,
+        password: password.value,
+      });
+
+      dispatch({
+        type: "SUCCESS_SIGNED_IN",
+        payload: success.user,
+      });
+
       inputForm["username"].value = "";
       inputForm["email"].value = "";
       inputForm["password"].value = "";
@@ -156,7 +166,7 @@ export default function Register(props) {
         ...formSetting,
       });
 
-      props.history.push("/map");
+      props.history.push("/user-profile");
     } catch (err) {
       toast.error(err.message, {
         position: "top-center",
