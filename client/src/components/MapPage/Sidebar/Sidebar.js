@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import CityPicker from "../CityPicker/CityPicker";
-import testData from "../../../data/testData";
 import "./Sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NestedList() {
+export default function Sidebar({ data }) {
   const classes = useStyles();
   const [fOpen, setOpenF] = React.useState(false);
   const [aOpen, setOpenA] = React.useState(false);
@@ -48,7 +47,7 @@ export default function NestedList() {
   };
 
   return (
-    <Grid container="true" id="properties">
+    <Grid container id="properties">
       <CityPicker />
       <List
         component="nav"
@@ -63,10 +62,10 @@ export default function NestedList() {
           <ListItemText primary="Favorites" />
           {fOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Grid item="true" id="favList">
-          <Collapse in={fOpen} timeout="3000" unmountOnExit>
-            {testData.map((item) => (
-              <List component="div" disablePadding>
+        <Grid item id="favList">
+          <Collapse in={fOpen} timeout={3000} unmountOnExit>
+            {data.map((item, idx) => (
+              <List key={idx} component="div" disablePadding>
                 <ListItem button className={classes.nested}>
                   <ListItemText primary={item.Address} />
                 </ListItem>
@@ -78,10 +77,10 @@ export default function NestedList() {
           <ListItemText primary="All" />
           {aOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Grid item="true" id="allList">
-          <Collapse in={aOpen} timeout="3000" unmountOnExit>
-            {testData.map((item) => (
-              <List component="div" disablePadding>
+        <Grid item id="allList">
+          <Collapse in={aOpen} timeout={3000} unmountOnExit>
+            {data.map((item, idx) => (
+              <List key={idx} component="div" disablePadding>
                 <ListItem button className={classes.nested}>
                   <ListItemText primary={item.Address} />
                 </ListItem>

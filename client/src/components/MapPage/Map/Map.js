@@ -40,16 +40,18 @@ export default function LeafMap({ data, city }) {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {data.map((property, idx) => (
-        <Marker
-          key={idx}
-          position={[property.Latitude, property.Longitude]}
-          onClick={() => {
-            setActiveProp(property);
-          }}
-          icon={icon}
-        />
-      ))}
+      {data
+        .filter(({ Address }) => Address.split(" ").includes(city))
+        .map((property, idx) => (
+          <Marker
+            key={idx}
+            position={[property.Latitude, property.Longitude]}
+            onClick={() => {
+              setActiveProp(property);
+            }}
+            icon={icon}
+          />
+        ))}
 
       {activeProp && (
         <Popup
