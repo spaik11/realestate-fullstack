@@ -1,5 +1,8 @@
 #properties {
-    height: 95%;
+    height: 97%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 #nested-list-subheader {
@@ -10,12 +13,12 @@
 }
 
 #favList {
-    max-height: 57.5vh;
+    max-height: 47.5vh;
     overflow: scroll;
 }
 
 #allList {
-    max-height: 57.5vh;
+    max-height: 46.5vh;
     overflow: scroll;
 }
 

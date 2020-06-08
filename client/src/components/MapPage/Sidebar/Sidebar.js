@@ -9,6 +9,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import CityPicker from "../CityPicker/CityPicker";
 import testData from "../../../data/testData";
 import "./Sidebar.css";
 
@@ -48,6 +49,7 @@ export default function NestedList() {
 
   return (
     <Grid container="true" id="properties">
+      <CityPicker />
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
