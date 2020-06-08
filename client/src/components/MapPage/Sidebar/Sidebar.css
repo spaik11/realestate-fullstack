@@ -13,12 +13,12 @@
 }
 
 #favList {
-    max-height: 47.5vh;
+    max-height: 44.5vh;
     overflow: scroll;
 }
 
 #allList {
-    max-height: 46.5vh;
+    max-height: 43.5vh;
     overflow: scroll;
 }
 
