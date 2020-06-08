@@ -9,7 +9,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import testData from "../../data/testData";
+import testData from "../../../data/testData";
 import "./Sidebar.css";
 
 const useStyles = makeStyles((theme) => ({

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "./Sidebar/Sidebar";
 import texasProperty from "../../lib/API/texas.json";
 import Map from "./Map/Map";
 import "./MapPage.css";
