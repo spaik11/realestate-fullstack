@@ -3,6 +3,7 @@ import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
 import texasProperty from "../../lib/API/texas.json";
 import Map from "./Map/Map";
+// import CityPicker from "./CityPicker/CityPicker";
 import "./MapPage.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +27,10 @@ export default function MapPage() {
     <Grid container id="main" className={classes.root} spacing={2}>
       <Grid item id="map">
         <Map data={apiProperty} city={currentCity} />
-      </Grid>
-      <Grid item id="sidebar">
-        <Sidebar />
-      </Grid>
+        </Grid>
+        <Grid item id="sidebar">
+          <Sidebar />
+        </Grid>
     </Grid>
   );
 }
