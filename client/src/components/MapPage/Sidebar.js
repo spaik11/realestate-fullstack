@@ -8,7 +8,7 @@ import './Sidebar.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
@@ -31,7 +31,7 @@ export default function NestedList() {
     };
   
     return (
-      <Grid container id="properties">
+      <Grid container="true" id="properties">
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
@@ -46,8 +46,8 @@ export default function NestedList() {
           <ListItemText primary="Favorites" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Grid item id="favList">
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Grid item="true" id="favList">
+        <Collapse in={open} timeout="3000" unmountOnExit>
           {testData.map(item =>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
@@ -61,13 +61,15 @@ export default function NestedList() {
           <ListItemText primary="All" />
           {closed ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Grid item id="allList">
-        <Collapse in={closed} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemText primary="item" />
-            </ListItem>
-          </List>
+        <Grid item="true" id="allList">
+        <Collapse in={closed} timeout="3000" unmountOnExit>
+          {testData.map(item =>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemText primary={item.Address} />
+              </ListItem>
+            </List>
+          )}
         </Collapse>
         </Grid>
       </List>
