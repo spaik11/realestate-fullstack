@@ -8,7 +8,6 @@ import './Sidebar.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
@@ -20,8 +19,6 @@ export default function NestedList() {
     const classes = useStyles();
     const [fOpen, setOpenF] = React.useState(false);
     const [aOpen, setOpenA] = React.useState(false);
-    // const fText = document.querySelector('#liText1');
-    const aText = document.querySelector('#liText2');
 
     const handleClickFavorites = () => {
       setOpenF(!fOpen);
@@ -35,7 +32,9 @@ export default function NestedList() {
       setOpenA(!aOpen);
       setOpenF(false);
       document.querySelector('#liText1').style.backgroundColor = 'white';
-      aOpen !== true ? aText.style.backgroundColor = 'rgb(63, 81, 181, .5)' : aText.style.backgroundColor = 'white';
+      aOpen !== true ? 
+        document.querySelector('#liText2').style.backgroundColor = 'rgb(63, 81, 181, .5)' : 
+        document.querySelector('#liText2').style.backgroundColor = 'white';
     };
   
     return (
