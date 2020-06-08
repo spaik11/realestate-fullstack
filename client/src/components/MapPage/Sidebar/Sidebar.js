@@ -63,7 +63,7 @@ export default function Sidebar({ data }) {
           {fOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Grid item id="favList">
-          <Collapse in={fOpen} timeout={3000} unmountOnExit>
+          <Collapse in={fOpen} unmountOnExit>
             {data.map((item, idx) => (
               <List key={idx} component="div" disablePadding>
                 <ListItem button className={classes.nested}>
@@ -78,7 +78,7 @@ export default function Sidebar({ data }) {
           {aOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Grid item id="allList">
-          <Collapse in={aOpen} timeout={3000} unmountOnExit>
+          <Collapse in={aOpen} unmountOnExit>
             {data.map((item, idx) => (
               <List key={idx} component="div" disablePadding>
                 <ListItem button className={classes.nested}>

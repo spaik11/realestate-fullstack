@@ -13,31 +13,29 @@ export default function UserProfile() {
     isAuth: { user },
   } = useContext(UserContext);
   const [formSetting, setFormSetting] = useState({
-    username: {
-      name: "username",
-      placeholder: user ? user.username : "",
+    address: {
+      name: "address",
+      placeholder: "Enter Address",
       value: "",
       error: { message: "", noError: null },
     },
-    password: {
-      name: "password",
-      placeholder: "Enter Password",
+    phoneNumber: {
+      name: "phoneNumber",
+      placeholder: "Enter Phone Number (No Dashes)",
       value: "",
       error: { message: "", noError: null },
     },
     creditScore: {
-      name: "creditScore",
-      placeholder: "Enter Credit Score",
-      value: "",
+      value: Math.floor(Math.random() * (850 - 300 + 1) + 300),
       error: { message: "", noError: null },
     },
   });
   const [validate, setValidate] = useState({
-    usernameError: {
+    addressError: {
       noError: true,
       message: "",
     },
-    passwordError: {
+    phoneNumberError: {
       noError: true,
       message: "",
     },
@@ -46,37 +44,35 @@ export default function UserProfile() {
 
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
-      case "username":
-        let usernameValidator = validator.matches(
+      case "address":
+        let addressValidator = validator.matches(
           inputValue,
           /^[a-zA-Z0-9]{1,20}$/
         );
 
-        if (!usernameValidator) {
-          errorState.usernameError.message =
+        if (!addressValidator) {
+          errorState.addressError.message =
             "Cannot contain special characters and max length of 20 characters";
-          errorState.usernameError.noError = true;
+          errorState.addressError.noError = true;
           return errorState;
         } else {
-          errorState.usernameError.message = "";
-          errorState.usernameError.noError = false;
+          errorState.addressError.message = "";
+          errorState.addressError.noError = false;
           return errorState;
         }
 
-      case "password":
-        let validatedPassword;
-        validatedPassword = validator.matches(
-          inputValue,
-          "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
-        );
-        if (!validatedPassword) {
-          errorState.passwordError.noError = true;
-          errorState.passwordError.message =
-            "Minimum eight characters, at least one letter, one number and one special character";
+      case "phoneNumber":
+        let validatedNumber;
+        validatedNumber = formSetting.phoneNumber.value.length < 10;
+
+        if (!validatedNumber) {
+          errorState.phoneNumberError.noError = true;
+          errorState.phoneNumberError.message =
+            "Please input a valid phone number";
           return errorState;
         } else {
-          errorState.passwordError.noError = false;
-          errorState.passwordError.message = "";
+          errorState.phoneNumberError.noError = false;
+          errorState.phoneNumberError.message = "";
           return errorState;
         }
 
@@ -98,8 +94,8 @@ export default function UserProfile() {
       e.target.value
     );
 
-    inputForm["username"].error = isValidatedCheck.usernameError;
-    inputForm["password"].error = isValidatedCheck.passwordError;
+    inputForm["address"].error = isValidatedCheck.usernameError;
+    inputForm["phoneNumber"].error = isValidatedCheck.passwordError;
 
     setValidate({ ...validate, isValidatedCheck });
     setFormSetting({ ...formSetting });
@@ -120,13 +116,16 @@ export default function UserProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, password } = formSetting;
+    const { address, phoneNumber, creditScore } = formSetting;
 
     try {
       await updateUser({
-        id: user.id,
-        username: username.value,
-        password: password.value,
+        _id: user.id,
+        profile: {
+          address: address.value,
+          phoneNumber: phoneNumber.value,
+          creditScore: creditScore.value,
+        },
       });
 
       let inputForm = {
@@ -162,28 +161,6 @@ export default function UserProfile() {
     }
   };
 
-  let inputArray = [];
-
-  for (let key in formSetting) {
-    inputArray.push({
-      formSetting: formSetting[key],
-    });
-  }
-
-  let renderInput = inputArray.map(
-    ({ formSetting: { name, value, error, placeholder } }, idx) => (
-      <InputGroup
-        key={idx}
-        name={name}
-        value={value}
-        type="text"
-        placeholder={placeholder}
-        onChange={handleChange}
-        error={error}
-      />
-    )
-  );
-
   return (
     <div className="signup-container">
       <ToastContainer
@@ -199,7 +176,28 @@ export default function UserProfile() {
       />
       <h1>Update Profile</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
-        {renderInput}
+        <InputGroup
+          key={1}
+          name={formSetting.address.name}
+          value={formSetting.address.value}
+          type="text"
+          placeholder={formSetting.address.placeholder}
+          onChange={handleChange}
+          error={formSetting.address.error}
+        />
+        <InputGroup
+          key={2}
+          name={formSetting.phoneNumber.name}
+          value={formSetting.phoneNumber.value}
+          type="text"
+          placeholder={formSetting.phoneNumber.placeholder}
+          onChange={handleChange}
+          error={formSetting.phoneNumber.error}
+        />
+        <input type="checkbox" id="credit" name="creditScore" value=" " />
+        <label for="credit">
+          I agree to the terms of service of a credit check
+        </label>
         <br />
         <ButtonGroup
           buttonStyle="form-button"
