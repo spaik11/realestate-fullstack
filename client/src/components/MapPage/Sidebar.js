@@ -18,16 +18,24 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NestedList() {
     const classes = useStyles();
-    const [open, setOpenF] = React.useState(false);
-    const [closed, setOpenA] = React.useState(false);
+    const [fOpen, setOpenF] = React.useState(false);
+    const [aOpen, setOpenA] = React.useState(false);
+    // const fText = document.querySelector('#liText1');
+    const aText = document.querySelector('#liText2');
 
     const handleClickFavorites = () => {
-      setOpenF(!open);
+      setOpenF(!fOpen);
       setOpenA(false);
+      document.querySelector('#liText2').style.backgroundColor = 'white';
+      fOpen !== true ? 
+        document.querySelector('#liText1').style.backgroundColor = 'rgb(63, 81, 181, .5)' : 
+        document.querySelector('#liText1').style.backgroundColor = 'white';
     };
     const handleClickAll = () => {
-      setOpenA(!closed);
+      setOpenA(!aOpen);
       setOpenF(false);
+      document.querySelector('#liText1').style.backgroundColor = 'white';
+      aOpen !== true ? aText.style.backgroundColor = 'rgb(63, 81, 181, .5)' : aText.style.backgroundColor = 'white';
     };
   
     return (
@@ -42,12 +50,12 @@ export default function NestedList() {
         }
         className={classes.root}
       >
-        <ListItem button onClick={handleClickFavorites}>
+        <ListItem id="liText1" button onClick={handleClickFavorites}>
           <ListItemText primary="Favorites" />
-          {open ? <ExpandLess /> : <ExpandMore />}
+          {fOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Grid item="true" id="favList">
-        <Collapse in={open} timeout="3000" unmountOnExit>
+        <Collapse in={fOpen} timeout="3000" unmountOnExit>
           {testData.map(item =>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
@@ -57,12 +65,12 @@ export default function NestedList() {
           )}
         </Collapse>
         </Grid>
-        <ListItem button onClick={handleClickAll}>
+        <ListItem id="liText2" button onClick={handleClickAll}>
           <ListItemText primary="All" />
-          {closed ? <ExpandLess /> : <ExpandMore />}
+          {aOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Grid item="true" id="allList">
-        <Collapse in={closed} timeout="3000" unmountOnExit>
+        <Collapse in={aOpen} timeout="3000" unmountOnExit>
           {testData.map(item =>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
