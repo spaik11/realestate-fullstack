@@ -8,7 +8,6 @@ import './Sidebar.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
@@ -18,20 +17,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NestedList() {
     const classes = useStyles();
-    const [open, setOpenF] = React.useState(false);
-    const [closed, setOpenA] = React.useState(false);
+    const [fOpen, setOpenF] = React.useState(false);
+    const [aOpen, setOpenA] = React.useState(false);
 
     const handleClickFavorites = () => {
-      setOpenF(!open);
+      setOpenF(!fOpen);
       setOpenA(false);
+      document.querySelector('#liText2').style.backgroundColor = 'white';
+      fOpen !== true ? 
+        document.querySelector('#liText1').style.backgroundColor = 'rgb(63, 81, 181, .5)' : 
+        document.querySelector('#liText1').style.backgroundColor = 'white';
     };
     const handleClickAll = () => {
-      setOpenA(!closed);
+      setOpenA(!aOpen);
       setOpenF(false);
+      document.querySelector('#liText1').style.backgroundColor = 'white';
+      aOpen !== true ? 
+        document.querySelector('#liText2').style.backgroundColor = 'rgb(63, 81, 181, .5)' : 
+        document.querySelector('#liText2').style.backgroundColor = 'white';
     };
   
     return (
-      <Grid container id="properties">
+      <Grid container="true" id="properties">
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
@@ -42,12 +49,12 @@ export default function NestedList() {
         }
         className={classes.root}
       >
-        <ListItem button onClick={handleClickFavorites}>
+        <ListItem id="liText1" button onClick={handleClickFavorites}>
           <ListItemText primary="Favorites" />
-          {open ? <ExpandLess /> : <ExpandMore />}
+          {fOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Grid item id="favList">
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Grid item="true" id="favList">
+        <Collapse in={fOpen} timeout="3000" unmountOnExit>
           {testData.map(item =>
             <List component="div" disablePadding>
               <ListItem button className={classes.nested}>
@@ -57,17 +64,19 @@ export default function NestedList() {
           )}
         </Collapse>
         </Grid>
-        <ListItem button onClick={handleClickAll}>
+        <ListItem id="liText2" button onClick={handleClickAll}>
           <ListItemText primary="All" />
-          {closed ? <ExpandLess /> : <ExpandMore />}
+          {aOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Grid item id="allList">
-        <Collapse in={closed} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={classes.nested}>
-              <ListItemText primary="item" />
-            </ListItem>
-          </List>
+        <Grid item="true" id="allList">
+        <Collapse in={aOpen} timeout="3000" unmountOnExit>
+          {testData.map(item =>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemText primary={item.Address} />
+              </ListItem>
+            </List>
+          )}
         </Collapse>
         </Grid>
       </List>

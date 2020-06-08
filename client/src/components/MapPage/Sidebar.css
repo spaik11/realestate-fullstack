@@ -10,11 +10,15 @@
 }
 
 #favList {
-    max-height: 300px;
+    max-height: 57.5vh;
     overflow: scroll;
 }
 
 #allList {
-    max-height: 300px;
+    max-height: 57.5vh;
     overflow: scroll;
+}
+
+.MuiListItemText-root {
+    margin-bottom: 0;
 }
