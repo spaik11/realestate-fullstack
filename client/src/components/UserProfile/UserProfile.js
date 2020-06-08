@@ -15,7 +15,7 @@ export default function UserProfile() {
   const [formSetting, setFormSetting] = useState({
     username: {
       name: "username",
-      placeholder: user.username,
+      placeholder: user ? user.username : "",
       value: "",
       error: { message: "", noError: null },
     },

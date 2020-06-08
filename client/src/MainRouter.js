@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Consumer } from "./components/Context/UserContext";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 import "./MainRouter.css";
 
@@ -26,8 +27,14 @@ export default class MainRouter extends Component {
                 <Switch>
                   <Route path="/login" exact component={Login} />
                   <Route path="/register" exact component={Register} />
-                  <Route path="/user-profile" exact component={UserProfile} />
-                  <Route path="/map" exact component={MapPage} />
+                  <PrivateRoute
+                    exact
+                    path="/user-profile"
+                    component={UserProfile}
+                  />
+                  <PrivateRoute exact path="/map" component={MapPage} />
+                  {/* <Route path="/user-profile" exact component={UserProfile} /> */}
+                  {/* <Route path="/map" exact component={MapPage} /> */}
                   <Route path="/" exact component={Landing} />
                 </Switch>
               </div>
