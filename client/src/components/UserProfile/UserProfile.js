@@ -5,13 +5,13 @@ import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import validator from "validator";
 import { updateUser } from "../../lib/Helpers/AuthHelpers";
-import { Consumer } from "../Context/UserContext";
+import { UserContext } from "../Context/UserContext";
 import "../Register/Register.css";
 
 export default function UserProfile() {
   const {
-    isAuth: { user, auth },
-  } = useContext(Consumer);
+    isAuth: { user },
+  } = useContext(UserContext);
   const [formSetting, setFormSetting] = useState({
     username: {
       name: "username",
