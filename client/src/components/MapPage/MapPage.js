@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Grid } from '@material-ui/core';
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar/Sidebar';
 import './MapPage.css';
 
 
