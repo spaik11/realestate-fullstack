@@ -1,7 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
 import { Consumer } from "../Context/UserContext";
 import {
   isAuthenticated,
@@ -22,8 +29,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar(props) {
-  const classes = useStyles();
+export default function Header(props) {
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const logUserOut = async () => {
     try {
@@ -43,6 +58,8 @@ export default function ButtonAppBar(props) {
       setUserAuth(jwtToken, props.dispatch);
     }
   }, [props.dispatch]);
+
+  const classes = useStyles();
 
   return (
     <Consumer>
@@ -65,30 +82,56 @@ export default function ButtonAppBar(props) {
                 </Typography>
                 {user && auth ? (
                   <>
-                    <Button color="inherit" key="1">
-                      <NavLink
-                        style={{ color: "white", textDecoration: "none" }}
-                        to="/map"
-                        exact>
-                        Search
-                      </NavLink>
+                    <Button
+                      aria-controls="simple-menu"
+                      aria-haspopup="true"
+                      onClick={handleClick}
+                      style={{ color: "white", textDecoration: "none" }}>
+                      {`Hello, ${user.username.toUpperCase()}`}
                     </Button>
-                    <Button color="inherit">
-                      <NavLink
-                        style={{ color: "white", textDecoration: "none" }}
-                        to="/user-profile"
-                        exact>
-                        {user.username.toUpperCase()}
-                      </NavLink>
-                    </Button>
-                    <Button color="inherit" onClick={logUserOut}>
-                      <NavLink
-                        style={{ color: "white", textDecoration: "none" }}
-                        to="/"
-                        exact>
-                        Log Out
-                      </NavLink>
-                    </Button>
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}>
+                      <MenuItem onClick={handleClose}>
+                        <NavLink
+                          style={{
+                            color: "#3f51b5",
+                            textDecoration: "none",
+                            fontWeight: "bold",
+                          }}
+                          to="/map"
+                          exact>
+                          Find a Home
+                        </NavLink>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose}>
+                        <NavLink
+                          style={{
+                            color: "#3f51b5",
+                            textDecoration: "none",
+                            fontWeight: "bold",
+                          }}
+                          to="/user-profile"
+                          exact>
+                          My Account
+                        </NavLink>
+                      </MenuItem>
+                      <MenuItem onClick={logUserOut}>
+                        <NavLink
+                          style={{
+                            color: "3f51b5",
+                            textDecoration: "none",
+                            fontWeight: "bold",
+                          }}
+                          to="/"
+                          exact>
+                          Log Out
+                        </NavLink>
+                      </MenuItem>
+                    </Menu>
                   </>
                 ) : (
                   <>
