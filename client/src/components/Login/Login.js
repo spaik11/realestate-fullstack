@@ -37,8 +37,8 @@ export default function Login(props) {
 
   useEffect(() => {
     let success = isAuthenticated();
-
-    if (success.username) {
+    console.log(success);
+    if (success) {
       props.history.push("/map");
     }
   }, [props.history]);

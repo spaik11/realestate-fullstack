@@ -3,11 +3,10 @@ const moment = require("moment");
 const now = moment();
 
 const UserSchema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
     trim: true,
-    required: "Username is required",
-    unique: "Username already exists, please choose another one",
+    required: "Name is required",
   },
   email: {
     type: String,

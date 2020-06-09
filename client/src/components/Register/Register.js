@@ -1,12 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import validator from "validator";
-import { createUser } from "../../lib/Helpers/AuthHelpers";
+import {
+  createUser,
+  loginUser,
+  isAuthenticated,
+} from "../../lib/Helpers/AuthHelpers";
 import { Consumer } from "../Context/UserContext";
+import {
+  makeStyles,
+  FormLabel,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+} from "@material-ui/core";
 import "./Register.css";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  formControl: {
+    margin: theme.spacing(3),
+  },
+}));
 
 export default function Register(props) {
   const [formSetting, setFormSetting] = useState({
@@ -44,6 +65,15 @@ export default function Register(props) {
     },
   });
   const [canSubmit, setCanSubmit] = useState(false);
+  const [checkBox, setCheckBox] = useState(false);
+
+  useEffect(() => {
+    let success = isAuthenticated();
+
+    if (success) {
+      props.history.push("/map");
+    }
+  }, [props.history]);
 
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
@@ -132,7 +162,11 @@ export default function Register(props) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleCheckChange = (event) => {
+    setCheckBox(event.target.checked);
+  };
+
+  const handleSubmit = async (e, dispatch) => {
     e.preventDefault();
 
     const { name, email, password } = formSetting;
@@ -151,6 +185,16 @@ export default function Register(props) {
       let inputForm = {
         ...formSetting,
       };
+
+      let success = await loginUser({
+        email: email.value,
+        password: password.value,
+      });
+
+      dispatch({
+        type: "SUCCESS_SIGNED_IN",
+        payload: success.user,
+      });
 
       inputForm["name"].value = "";
       inputForm["email"].value = "";
@@ -204,6 +248,10 @@ export default function Register(props) {
     )
   );
 
+  const classes = useStyles();
+
+  let buttonDisabled = !canSubmit || !checkBox ? true : false;
+
   return (
     <Consumer>
       {({ dispatch }) => {
@@ -223,11 +271,28 @@ export default function Register(props) {
             <h1>Register</h1>
             <form className="form" onSubmit={(e) => handleSubmit(e, dispatch)}>
               {renderInput}
+              <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend">
+                  TruZilla Customer Agreement
+                </FormLabel>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={checkBox}
+                        onChange={handleCheckChange}
+                        name="checkBox"
+                      />
+                    }
+                    label="I agree to the terms of service of a credit check"
+                  />
+                </FormGroup>
+              </FormControl>
               <br />
               <ButtonGroup
                 buttonStyle="form-button"
                 title="Sign Up"
-                disabled={!canSubmit}
+                disabled={buttonDisabled}
               />
             </form>
           </div>

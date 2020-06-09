@@ -9,13 +9,13 @@ require("dotenv").config();
 
 module.exports = {
   createUser: async (req, res) => {
-    const { username, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       let createdUser = new User({
         email,
         password,
-        username,
+        name,
       });
 
       let genSalt = await bcrypt.genSalt(12);
@@ -23,7 +23,7 @@ module.exports = {
       createdUser.password = hashedPassword;
 
       await createdUser.save();
-      console.log(createdUser);
+      console.log("Created User:", createdUser);
 
       let jwtToken = jwtTokenIssue(createdUser);
 
@@ -66,7 +66,7 @@ module.exports = {
 
           foundUser = foundUser.toObject();
           delete foundUser.password;
-
+          console.log(foundUser);
           res.json({ user: foundUser });
         }
       }
@@ -101,8 +101,9 @@ module.exports = {
       let updatedUser = await User.findByIdAndUpdate({ _id: user }, req.body, {
         new: true,
       });
+      console.log("updateProfile:", updatedUser);
 
-      res.json({ message: "Updated Profile!" });
+      res.json({ message: "Updated Profile!", user: updatedUser });
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),
