@@ -27,8 +27,10 @@ const UserSchema = new mongoose.Schema({
   favorites: {
     type: Array,
   },
-  creditScore: {
-    type: Number,
+  profile: {
+    address: { type: String },
+    phoneNumber: { type: String },
+    creditScore: { type: Number },
   },
 });
 
