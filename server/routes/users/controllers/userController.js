@@ -97,12 +97,12 @@ module.exports = {
   },
   updateProfile: async (req, res) => {
     try {
-      let user = req.body.id;
+      let user = req.body._id;
       let updatedUser = await User.findByIdAndUpdate({ _id: user }, req.body, {
         new: true,
       });
 
-      res.json(updatedUser);
+      res.json({ message: "Updated Profile!" });
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),
