@@ -60,6 +60,11 @@ export const updateUser = async (userInfo) => {
   try {
     let { data } = await Axios.put("/api/users/update-profile", userInfo, {
       withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
     });
     return data;
   } catch (e) {

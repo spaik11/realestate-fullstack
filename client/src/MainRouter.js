@@ -33,8 +33,6 @@ export default class MainRouter extends Component {
                     component={UserProfile}
                   />
                   <PrivateRoute exact path="/map" component={MapPage} />
-                  {/* <Route path="/user-profile" exact component={UserProfile} /> */}
-                  {/* <Route path="/map" exact component={MapPage} /> */}
                   <Route path="/" exact component={Landing} />
                 </Switch>
               </div>

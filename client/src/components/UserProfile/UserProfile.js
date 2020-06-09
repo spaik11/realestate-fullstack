@@ -25,10 +25,6 @@ export default function UserProfile() {
       value: "",
       error: { message: "", noError: null },
     },
-    creditScore: {
-      value: Math.floor(Math.random() * (850 - 300 + 1) + 300),
-      error: { message: "", noError: null },
-    },
   });
   const [validate, setValidate] = useState({
     addressError: {
@@ -47,7 +43,7 @@ export default function UserProfile() {
       case "address":
         let addressValidator = validator.matches(
           inputValue,
-          /^[a-zA-Z0-9]{1,20}$/
+          /^[^`~!@#$%^&*()_+={}\[\]|\\:;“’<,>.?๐฿]*$/
         );
 
         if (!addressValidator) {
@@ -63,9 +59,9 @@ export default function UserProfile() {
 
       case "phoneNumber":
         let validatedNumber;
-        validatedNumber = formSetting.phoneNumber.value.length < 10;
+        validatedNumber = formSetting.phoneNumber.value.length === 9;
 
-        if (!validatedNumber) {
+        if (validatedNumber) {
           errorState.phoneNumberError.noError = true;
           errorState.phoneNumberError.message =
             "Please input a valid phone number";
@@ -115,8 +111,8 @@ export default function UserProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { address, phoneNumber, creditScore } = formSetting;
+    console.log("WHAT IS USER", user);
+    const { address, phoneNumber } = formSetting;
 
     try {
       await updateUser({
@@ -124,7 +120,7 @@ export default function UserProfile() {
         profile: {
           address: address.value,
           phoneNumber: phoneNumber.value,
-          creditScore: creditScore.value,
+          creditScore: Math.floor(Math.random() * (850 - 300 + 1) + 300),
         },
       });
 
@@ -132,8 +128,8 @@ export default function UserProfile() {
         ...formSetting,
       };
 
-      inputForm["username"].value = "";
-      inputForm["password"].value = "";
+      inputForm["address"].value = "";
+      inputForm["phoneNumber"].value = "";
 
       setFormSetting({
         ...formSetting,
@@ -161,6 +157,28 @@ export default function UserProfile() {
     }
   };
 
+  let inputArray = [];
+
+  for (let key in formSetting) {
+    inputArray.push({
+      formSetting: formSetting[key],
+    });
+  }
+
+  let renderInput = inputArray.map(
+    ({ formSetting: { name, value, error, placeholder } }, idx) => (
+      <InputGroup
+        key={idx}
+        name={name}
+        value={value}
+        type="text"
+        placeholder={placeholder}
+        onChange={handleChange}
+        error={error}
+      />
+    )
+  );
+
   return (
     <div className="signup-container">
       <ToastContainer
@@ -176,28 +194,9 @@ export default function UserProfile() {
       />
       <h1>Update Profile</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
-        <InputGroup
-          key={1}
-          name={formSetting.address.name}
-          value={formSetting.address.value}
-          type="text"
-          placeholder={formSetting.address.placeholder}
-          onChange={handleChange}
-          error={formSetting.address.error}
-        />
-        <InputGroup
-          key={2}
-          name={formSetting.phoneNumber.name}
-          value={formSetting.phoneNumber.value}
-          type="text"
-          placeholder={formSetting.phoneNumber.placeholder}
-          onChange={handleChange}
-          error={formSetting.phoneNumber.error}
-        />
-        <input type="checkbox" id="credit" name="creditScore" value=" " />
-        <label for="credit">
-          I agree to the terms of service of a credit check
-        </label>
+        {renderInput}
+        <input type="checkbox" id="credit" name="creditScore" value="" />
+        <label>I agree to the terms of service of a credit check</label>
         <br />
         <ButtonGroup
           buttonStyle="form-button"

@@ -122,7 +122,7 @@ export default function Header(props) {
                       <MenuItem onClick={logUserOut}>
                         <NavLink
                           style={{
-                            color: "3f51b5",
+                            color: "#3f51b5",
                             textDecoration: "none",
                             fontWeight: "bold",
                           }}

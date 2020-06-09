@@ -27,7 +27,7 @@ Axios.interceptors.request.use(
 
 Axios.interceptors.response.use(
   (response) => {
-    console.log("REQ ######");
+    console.log("RES ######");
     console.log(response);
     // Edit request config
     return response;
