@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Menu,
-  MenuItem,
-} from "@material-ui/core";
-import { Consumer } from "../Context/UserContext";
-import {
-  isAuthenticated,
-  setUserAuth,
-  logout,
-} from "../../lib/Helpers/AuthHelpers";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { UserContext } from "../Context/UserContext";
+import { isAuthenticated, setUserAuth } from "../../lib/Helpers/AuthHelpers";
+import AuthHeader from "./AuthHeader";
+import UnAuthHeader from "./UnAuthHeader";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,134 +21,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header(props) {
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const logUserOut = async () => {
-    try {
-      await logout();
-      props.dispatch({
-        type: "SUCCESS_SIGNED_OUT",
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const {
+    isAuth: { user, auth },
+    dispatch,
+  } = useContext(UserContext);
 
   useEffect(() => {
     let jwtToken = isAuthenticated();
 
-    if (jwtToken) {
+    if (jwtToken !== false) {
       setUserAuth(jwtToken, props.dispatch);
     }
   }, [props.dispatch]);
 
   const classes = useStyles();
 
-  return (
-    <Consumer>
-      {(context) => {
-        const {
-          isAuth: { user, auth },
-        } = context;
+  let loading = null;
 
-        return (
-          <div id="header" className={classes.root}>
-            <AppBar position="static">
-              <Toolbar>
-                <Typography variant="h6" className={classes.title}>
-                  <NavLink
-                    style={{ color: "white", textDecoration: "none" }}
-                    to="/"
-                    exact>
-                    TruZillow
-                  </NavLink>
-                </Typography>
-                {user && auth ? (
-                  <>
-                    <Button
-                      aria-controls="simple-menu"
-                      aria-haspopup="true"
-                      onClick={handleClick}
-                      style={{ color: "white", textDecoration: "none" }}>
-                      {`Welcome, ${user.name.toUpperCase()}`}
-                    </Button>
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}>
-                      <MenuItem onClick={handleClose}>
-                        <NavLink
-                          style={{
-                            color: "#3f51b5",
-                            textDecoration: "none",
-                            fontWeight: "bold",
-                          }}
-                          to="/map"
-                          exact>
-                          Find a Home
-                        </NavLink>
-                      </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <NavLink
-                          style={{
-                            color: "#3f51b5",
-                            textDecoration: "none",
-                            fontWeight: "bold",
-                          }}
-                          to="/user-profile"
-                          exact>
-                          My Account
-                        </NavLink>
-                      </MenuItem>
-                      <MenuItem onClick={logUserOut}>
-                        <NavLink
-                          style={{
-                            color: "#3f51b5",
-                            textDecoration: "none",
-                            fontWeight: "bold",
-                          }}
-                          to="/"
-                          exact>
-                          Log Out
-                        </NavLink>
-                      </MenuItem>
-                    </Menu>
-                  </>
-                ) : (
-                  <>
-                    <Button color="inherit">
-                      <NavLink
-                        style={{ color: "white", textDecoration: "none" }}
-                        to="/login"
-                        exact>
-                        Login
-                      </NavLink>
-                    </Button>
-                    <Button color="inherit">
-                      <NavLink
-                        style={{ color: "white", textDecoration: "none" }}
-                        to="/register"
-                        exact>
-                        Register
-                      </NavLink>
-                    </Button>
-                  </>
-                )}
-              </Toolbar>
-            </AppBar>
-          </div>
-        );
-      }}
-    </Consumer>
+  if (!auth) {
+    loading = <UnAuthHeader />;
+  } else {
+    loading = <AuthHeader {...user} {...auth} dispatch={dispatch} />;
+  }
+
+  return (
+    <div id="header" className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            <NavLink
+              style={{ color: "white", textDecoration: "none" }}
+              to="/"
+              exact>
+              TruZillow
+            </NavLink>
+          </Typography>
+          <nav>{loading}</nav>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }

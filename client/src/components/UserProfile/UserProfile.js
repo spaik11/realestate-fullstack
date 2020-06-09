@@ -1,18 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import validator from "validator";
-import { updateUser } from "../../lib/Helpers/AuthHelpers";
+import { updateUser, isAuthenticated } from "../../lib/Helpers/AuthHelpers";
 import { UserContext } from "../Context/UserContext";
 import "../Register/Register.css";
 
-export default function UserProfile() {
+export default function UserProfile(props) {
   const {
     isAuth: { user },
   } = useContext(UserContext);
   const [formSetting, setFormSetting] = useState({
+    name: {
+      name: "name",
+      placeholder: "Enter Name",
+      value: "",
+      error: { message: "", noError: null },
+    },
     address: {
       name: "address",
       placeholder: "Enter Address",
@@ -27,6 +33,10 @@ export default function UserProfile() {
     },
   });
   const [validate, setValidate] = useState({
+    nameError: {
+      noError: true,
+      message: "",
+    },
     addressError: {
       noError: true,
       message: "",
@@ -40,6 +50,23 @@ export default function UserProfile() {
 
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
+      case "name":
+        let nameValidator = validator.matches(
+          inputValue,
+          /^[a-zA-Z0-9]{1,20}$/
+        );
+
+        if (!nameValidator) {
+          errorState.nameError.message =
+            "Cannot contain special characters and max length of 20 characters";
+          errorState.nameError.noError = true;
+          return errorState;
+        } else {
+          errorState.nameError.message = "";
+          errorState.nameError.noError = false;
+          return errorState;
+        }
+
       case "address":
         let addressValidator = validator.matches(
           inputValue,
@@ -90,6 +117,7 @@ export default function UserProfile() {
       e.target.value
     );
 
+    inputForm["name"].error = isValidatedCheck.usernameError;
     inputForm["address"].error = isValidatedCheck.usernameError;
     inputForm["phoneNumber"].error = isValidatedCheck.passwordError;
 
@@ -112,11 +140,12 @@ export default function UserProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("WHAT IS USER", user);
-    const { address, phoneNumber } = formSetting;
+    const { name, address, phoneNumber } = formSetting;
 
     try {
       await updateUser({
         _id: user.id,
+        name: name.value,
         profile: {
           address: address.value,
           phoneNumber: phoneNumber.value,
@@ -127,6 +156,7 @@ export default function UserProfile() {
         ...formSetting,
       };
 
+      inputForm["name"].value = "";
       inputForm["address"].value = "";
       inputForm["phoneNumber"].value = "";
 
