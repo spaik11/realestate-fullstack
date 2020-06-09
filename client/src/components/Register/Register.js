@@ -4,15 +4,15 @@ import "react-toastify/dist/ReactToastify.css";
 import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import validator from "validator";
-import { createUser, loginUser } from "../../lib/Helpers/AuthHelpers";
+import { createUser } from "../../lib/Helpers/AuthHelpers";
 import { Consumer } from "../Context/UserContext";
 import "./Register.css";
 
 export default function Register(props) {
   const [formSetting, setFormSetting] = useState({
-    username: {
-      name: "username",
-      placeholder: "Enter Username",
+    name: {
+      name: "name",
+      placeholder: "Enter Name",
       value: "",
       error: { message: "", noError: null },
     },
@@ -30,7 +30,7 @@ export default function Register(props) {
     },
   });
   const [validate, setValidate] = useState({
-    usernameError: {
+    nameError: {
       noError: true,
       message: "",
     },
@@ -47,20 +47,20 @@ export default function Register(props) {
 
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
-      case "username":
-        let usernameValidator = validator.matches(
+      case "name":
+        let nameValidator = validator.matches(
           inputValue,
           /^[a-zA-Z0-9]{1,20}$/
         );
 
-        if (!usernameValidator) {
-          errorState.usernameError.message =
+        if (!nameValidator) {
+          errorState.nameError.message =
             "Cannot contain special characters and max length of 20 characters";
-          errorState.usernameError.noError = true;
+          errorState.nameError.noError = true;
           return errorState;
         } else {
-          errorState.usernameError.message = "";
-          errorState.usernameError.noError = false;
+          errorState.nameError.message = "";
+          errorState.nameError.noError = false;
           return errorState;
         }
 
@@ -112,7 +112,7 @@ export default function Register(props) {
       e.target.value
     );
 
-    inputForm["username"].error = isValidatedCheck.usernameError;
+    inputForm["name"].error = isValidatedCheck.nameError;
     inputForm["email"].error = isValidatedCheck.emailError;
     inputForm["password"].error = isValidatedCheck.passwordError;
 
@@ -132,33 +132,27 @@ export default function Register(props) {
     }
   };
 
-  const handleSubmit = async (e, dispatch) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, email, password } = formSetting;
+    const { name, email, password } = formSetting;
+    let randomCreditScore = Math.floor(Math.random() * (850 - 300 + 1) + 300);
 
     try {
       await createUser({
-        username: username.value,
+        name: name.value,
         email: email.value,
         password: password.value,
+        profile: {
+          creditScore: randomCreditScore,
+        },
       });
 
       let inputForm = {
         ...formSetting,
       };
 
-      let success = await loginUser({
-        email: email.value,
-        password: password.value,
-      });
-
-      dispatch({
-        type: "SUCCESS_SIGNED_IN",
-        payload: success.user,
-      });
-
-      inputForm["username"].value = "";
+      inputForm["name"].value = "";
       inputForm["email"].value = "";
       inputForm["password"].value = "";
 
@@ -166,7 +160,15 @@ export default function Register(props) {
         ...formSetting,
       });
 
-      props.history.push("/user-profile");
+      toast.success(`Congrats, Your Credit Score is ${randomCreditScore}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err) {
       toast.error(err.message, {
         position: "top-center",

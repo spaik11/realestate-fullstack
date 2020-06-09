@@ -14,11 +14,14 @@ export default function InputGroup({
       <input
         type={type}
         name={name}
-        className={classnames("form-style")}
+        className={classnames("form-style", {
+          isvalid: error.noError === false ? true : false,
+        })}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
       />
+      {error.noError && <div className="invalid-message">{error.message}</div>}
     </div>
   );
 }

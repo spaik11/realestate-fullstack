@@ -87,7 +87,7 @@ export default function Header(props) {
                       aria-haspopup="true"
                       onClick={handleClick}
                       style={{ color: "white", textDecoration: "none" }}>
-                      {`Hello, ${user.username.toUpperCase()}`}
+                      {`Welcome, ${user.name.toUpperCase()}`}
                     </Button>
                     <Menu
                       id="simple-menu"

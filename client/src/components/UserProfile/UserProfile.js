@@ -120,7 +120,6 @@ export default function UserProfile() {
         profile: {
           address: address.value,
           phoneNumber: phoneNumber.value,
-          creditScore: Math.floor(Math.random() * (850 - 300 + 1) + 300),
         },
       });
 
@@ -195,8 +194,6 @@ export default function UserProfile() {
       <h1>Update Profile</h1>
       <form className="form" onSubmit={(e) => handleSubmit(e)}>
         {renderInput}
-        <input type="checkbox" id="credit" name="creditScore" value="" />
-        <label>I agree to the terms of service of a credit check</label>
         <br />
         <ButtonGroup
           buttonStyle="form-button"
