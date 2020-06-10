@@ -17,8 +17,14 @@ const passwordValidator = async (dbPw, userPw) => {
 const jwtTokenIssue = (user) => {
   let payload = {
     id: user.id,
-    username: user.username,
+    name: user.name,
     email: user.email,
+    favorites: user.favorites,
+    profile: {
+      address: user.profile.address,
+      phoneNumber: user.profile.phoneNumber,
+      creditScore: user.profile.creditScore,
+    },
   };
 
   let jwtToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
