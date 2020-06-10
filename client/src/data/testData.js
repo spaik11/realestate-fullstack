@@ -6,8 +6,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 982,
-        "Area Units": "Square Feet",
+        "Living_Area": 982,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.002,
         "Lot Units": "Square Feet",
         "Bedrooms": 1,
@@ -23,8 +23,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1095,
-        "Area Units": "Square Feet",
+        "Living_Area": 1095,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.019,
         "Lot Units": "Square Feet",
         "Bedrooms": 1,
@@ -40,8 +40,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1294,
-        "Area Units": "Square Feet",
+        "Living_Area": 1294,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.008,
         "Lot Units": "Square Feet",
         "Bedrooms": 2,
@@ -57,8 +57,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 641,
-        "Area Units": "Square Feet",
+        "Living_Area": 641,
+        "Area_Units": "Square Feet",
         "Lot Size": 0,
         "Lot Units": "Square Feet",
         "Bedrooms": 1,
@@ -74,8 +74,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 741,
-        "Area Units": "Square Feet",
+        "Living_Area": 741,
+        "Area_Units": "Square Feet",
         "Lot Size": 0,
         "Lot Units": "Square Feet",
         "Bedrooms": 1,
@@ -91,8 +91,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1815,
-        "Area Units": "Square Feet",
+        "Living_Area": 1815,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.01,
         "Lot Units": "Square Feet",
         "Bedrooms": 2,
@@ -108,8 +108,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1219,
-        "Area Units": "Square Feet",
+        "Living_Area": 1219,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.004,
         "Lot Units": "Square Feet",
         "Bedrooms": 2,
@@ -125,8 +125,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 849,
-        "Area Units": "Square Feet",
+        "Living_Area": 849,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.002,
         "Lot Units": "Square Feet",
         "Bedrooms": 1,
@@ -142,8 +142,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 886,
-        "Area Units": "Square Feet",
+        "Living_Area": 886,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.003,
         "Lot Units": "Square Feet",
         "Bedrooms": 2,
@@ -159,8 +159,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1235,
-        "Area Units": "Square Feet",
+        "Living_Area": 1235,
+        "Area_Units": "Square Feet",
         "Lot Size": null,
         "Lot Units": "Square Feet",
         "Bedrooms": 2,
@@ -174,8 +174,8 @@ const testData =
         "Price": 300000,
         "Property Type": null,
         "Levels": [],
-        "Living Area": null,
-        "Area Units": "Square Feet",
+        "Living_Area": null,
+        "Area_Units": "Square Feet",
         "Lot Size": 5.956,
         "Lot Units": "Square Feet",
         "Bedrooms": null,
@@ -191,8 +191,8 @@ const testData =
         "Levels": [
             "Two"
         ],
-        "Living Area": 3976,
-        "Area Units": "Square Feet",
+        "Living_Area": 3976,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.75,
         "Lot Units": "Square Feet",
         "Bedrooms": 4,
@@ -208,8 +208,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 4770,
-        "Area Units": "Square Feet",
+        "Living_Area": 4770,
+        "Area_Units": "Square Feet",
         "Lot Size": 1.337,
         "Lot Units": "Square Feet",
         "Bedrooms": 5,
@@ -225,8 +225,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 3164,
-        "Area Units": "Square Feet",
+        "Living_Area": 3164,
+        "Area_Units": "Square Feet",
         "Lot Size": 1.17,
         "Lot Units": "Square Feet",
         "Bedrooms": 4,
@@ -242,8 +242,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 4301,
-        "Area Units": "Square Feet",
+        "Living_Area": 4301,
+        "Area_Units": "Square Feet",
         "Lot Size": 16,
         "Lot Units": "Square Feet",
         "Bedrooms": 4,
@@ -257,8 +257,8 @@ const testData =
         "Price": 6000,
         "Property Type": null,
         "Levels": [],
-        "Living Area": null,
-        "Area Units": "Square Feet",
+        "Living_Area": null,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.35,
         "Lot Units": "Square Feet",
         "Bedrooms": null,
@@ -272,8 +272,8 @@ const testData =
         "Price": 300000,
         "Property Type": null,
         "Levels": [],
-        "Living Area": null,
-        "Area Units": "Square Feet",
+        "Living_Area": null,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.795,
         "Lot Units": "Square Feet",
         "Bedrooms": null,
@@ -289,8 +289,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1984,
-        "Area Units": "Square Feet",
+        "Living_Area": 1984,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.163,
         "Lot Units": "Square Feet",
         "Bedrooms": 4,
@@ -306,8 +306,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1512,
-        "Area Units": "Square Feet",
+        "Living_Area": 1512,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.301,
         "Lot Units": "Square Feet",
         "Bedrooms": 3,
@@ -323,8 +323,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1034,
-        "Area Units": "Square Feet",
+        "Living_Area": 1034,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.158,
         "Lot Units": "Square Feet",
         "Bedrooms": 3,
@@ -340,8 +340,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1975,
-        "Area Units": "Square Feet",
+        "Living_Area": 1975,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.198,
         "Lot Units": "Square Feet",
         "Bedrooms": 4,
@@ -357,8 +357,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 2276,
-        "Area Units": "Square Feet",
+        "Living_Area": 2276,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.13,
         "Lot Units": "Square Feet",
         "Bedrooms": 3,
@@ -374,8 +374,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 2144,
-        "Area Units": "Square Feet",
+        "Living_Area": 2144,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.19,
         "Lot Units": "Square Feet",
         "Bedrooms": 3,
@@ -391,8 +391,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 2076,
-        "Area Units": "Square Feet",
+        "Living_Area": 2076,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.44,
         "Lot Units": "Square Feet",
         "Bedrooms": 3,
@@ -408,8 +408,8 @@ const testData =
         "Levels": [
             "One"
         ],
-        "Living Area": 1943,
-        "Area Units": "Square Feet",
+        "Living_Area": 1943,
+        "Area_Units": "Square Feet",
         "Lot Size": 0.179,
         "Lot Units": "Square Feet",
         "Bedrooms": 4,

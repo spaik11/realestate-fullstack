@@ -30,7 +30,7 @@ export default function MapPage() {
         <Map data={apiProperty} city={currentCity} />
       </Grid>
       <Grid item id="sidebar">
-        <Sidebar data={apiProperty} />
+        <Sidebar data={apiProperty} setList={setApiProperty} />
       </Grid>
     </Grid>
   );
