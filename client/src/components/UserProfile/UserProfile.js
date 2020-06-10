@@ -28,7 +28,7 @@ export default function UserProfile() {
     },
     phoneNumber: {
       name: "phoneNumber",
-      placeholder: "Enter Phone Number (No Dashes)",
+      placeholder: "Enter Phone Number",
       value: `${user.profile.phoneNumber}` ? `${user.profile.phoneNumber}` : "",
       error: { message: "", noError: null },
     },
@@ -86,12 +86,12 @@ export default function UserProfile() {
         }
 
       case "phoneNumber":
-        let validatedNumber;
-        validatedNumber =
-          formSetting.phoneNumber.value.length >= 1 &&
-          formSetting.phoneNumber.value.length <= 9;
+        let validatedNumber = validator.matches(
+          formSetting.phoneNumber.value,
+          /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+        );
 
-        if (validatedNumber) {
+        if (!validatedNumber) {
           errorState.phoneNumberError.noError = true;
           errorState.phoneNumberError.message =
             "Please input a valid phone number";
