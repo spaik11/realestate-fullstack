@@ -177,7 +177,10 @@ export default function Register(props) {
         name: name.value,
         email: email.value,
         password: password.value,
+        favorites: [],
         profile: {
+          address: "",
+          phoneNumber: "",
           creditScore: randomCreditScore,
         },
       });
@@ -203,6 +206,8 @@ export default function Register(props) {
       setFormSetting({
         ...formSetting,
       });
+
+      setCheckBox(false);
 
       toast.success(`Congrats, Your Credit Score is ${randomCreditScore}`, {
         position: "top-center",

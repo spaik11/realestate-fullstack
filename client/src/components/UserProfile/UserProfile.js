@@ -8,14 +8,15 @@ import { updateUser } from "../../lib/Helpers/AuthHelpers";
 import { UserContext } from "../Context/UserContext";
 import "../Register/Register.css";
 
-export default function UserProfile(props) {
+export default function UserProfile() {
   const {
     isAuth: { user },
+    dispatch,
   } = useContext(UserContext);
   const [formSetting, setFormSetting] = useState({
     name: {
       name: "name",
-      placeholder: "Enter Name",
+      placeholder: user.name,
       value: "",
       error: { message: "", noError: null },
     },
@@ -137,13 +138,13 @@ export default function UserProfile(props) {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, dispatch) => {
     e.preventDefault();
 
     const { name, address, phoneNumber } = formSetting;
 
     try {
-      await updateUser({
+      let success = await updateUser({
         _id: user.id,
         name: name.value,
         profile: {
@@ -162,6 +163,11 @@ export default function UserProfile(props) {
 
       setFormSetting({
         ...formSetting,
+      });
+
+      dispatch({
+        type: "SUCCESS_SIGNED_IN",
+        payload: success.user,
       });
 
       toast.success(`User Updated!`, {
@@ -222,7 +228,7 @@ export default function UserProfile(props) {
         pauseOnHover
       />
       <h1>Update Profile</h1>
-      <form className="form" onSubmit={(e) => handleSubmit(e)}>
+      <form className="form" onSubmit={(e) => handleSubmit(e, dispatch)}>
         {renderInput}
         <br />
         <ButtonGroup

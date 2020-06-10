@@ -9,7 +9,6 @@ export default function InputGroup({
   placeholder,
   onChange,
 }) {
-  console.log("INPUT GROUP ", error);
   return (
     <div className="form-group">
       <input

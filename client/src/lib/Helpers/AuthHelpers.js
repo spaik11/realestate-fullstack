@@ -66,6 +66,7 @@ export const updateUser = async (userInfo) => {
         Authorization: "Bearer " + isAuthenticated(),
       },
     });
+    console.log("DATA ", data);
     return data;
   } catch (e) {
     throw Error(e.response.data.message);

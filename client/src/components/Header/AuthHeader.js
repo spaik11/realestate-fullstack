@@ -31,7 +31,7 @@ export default function AuthHeader(props) {
         aria-haspopup="true"
         onClick={handleClick}
         style={{ color: "white", textDecoration: "none" }}>
-        {`Welcome, ${props.email.slice(0, props.email.indexOf("@"))}`}
+        {`Welcome, ${props.name}`}
       </Button>
       <Menu
         id="simple-menu"

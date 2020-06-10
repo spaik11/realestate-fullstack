@@ -127,6 +127,8 @@ export default function Login(props) {
         ...formSetting,
       };
 
+      console.log("PAY LOAD SUCCESS", success);
+
       inputForm["email"].value = "";
       inputForm["password"].value = "";
 
