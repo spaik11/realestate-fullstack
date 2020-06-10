@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import validator from "validator";
-import { updateUser, isAuthenticated } from "../../lib/Helpers/AuthHelpers";
+import { updateUser } from "../../lib/Helpers/AuthHelpers";
 import { UserContext } from "../Context/UserContext";
 import "../Register/Register.css";
 
@@ -117,9 +117,9 @@ export default function UserProfile(props) {
       e.target.value
     );
 
-    inputForm["name"].error = isValidatedCheck.usernameError;
-    inputForm["address"].error = isValidatedCheck.usernameError;
-    inputForm["phoneNumber"].error = isValidatedCheck.passwordError;
+    inputForm["name"].error = isValidatedCheck.nameError;
+    inputForm["address"].error = isValidatedCheck.addressError;
+    inputForm["phoneNumber"].error = isValidatedCheck.phoneNumberError;
 
     setValidate({ ...validate, isValidatedCheck });
     setFormSetting({ ...formSetting });
@@ -139,7 +139,7 @@ export default function UserProfile(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("WHAT IS USER", user);
+
     const { name, address, phoneNumber } = formSetting;
 
     try {

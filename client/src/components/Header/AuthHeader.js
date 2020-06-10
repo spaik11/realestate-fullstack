@@ -23,7 +23,7 @@ export default function AuthHeader(props) {
       console.log(e);
     }
   };
-  console.log(props);
+
   return (
     <>
       <Button

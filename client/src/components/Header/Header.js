@@ -36,14 +36,6 @@ export default function Header(props) {
 
   const classes = useStyles();
 
-  let loading = null;
-
-  if (!auth) {
-    loading = <UnAuthHeader />;
-  } else {
-    loading = <AuthHeader {...user} {...auth} dispatch={dispatch} />;
-  }
-
   return (
     <div id="header" className={classes.root}>
       <AppBar position="static">
@@ -56,7 +48,11 @@ export default function Header(props) {
               TruZillow
             </NavLink>
           </Typography>
-          <nav>{loading}</nav>
+          {user && auth ? (
+            <AuthHeader {...user} {...auth} dispatch={dispatch} />
+          ) : (
+            <UnAuthHeader />
+          )}
         </Toolbar>
       </AppBar>
     </div>
