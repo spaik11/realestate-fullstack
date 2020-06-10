@@ -119,6 +119,16 @@ module.exports = {
       updatedUser = updatedUser.toObject();
       delete updatedUser.password;
 
+      res.clearCookie("jwt-cookie-expense");
+
+      let jwtToken = jwtTokenIssue(updatedUser);
+
+      res.cookie("jwt-cookie-expense", jwtToken, {
+        expires: new Date(Date.now() + 36000 * 60 * 24),
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+      });
+
       res.json({ user: updatedUser });
     } catch (e) {
       res.status(500).json({

@@ -16,20 +16,20 @@ export default function UserProfile() {
   const [formSetting, setFormSetting] = useState({
     name: {
       name: "name",
-      placeholder: user.name,
-      value: "",
+      placeholder: "Enter Name",
+      value: `${user.name}`,
       error: { message: "", noError: null },
     },
     address: {
       name: "address",
       placeholder: "Enter Address",
-      value: "",
+      value: `${user.profile.address}` ? `${user.profile.address}` : "",
       error: { message: "", noError: null },
     },
     phoneNumber: {
       name: "phoneNumber",
       placeholder: "Enter Phone Number (No Dashes)",
-      value: "",
+      value: `${user.profile.phoneNumber}` ? `${user.profile.phoneNumber}` : "",
       error: { message: "", noError: null },
     },
   });
@@ -48,7 +48,7 @@ export default function UserProfile() {
     },
   });
   const [canSubmit, setCanSubmit] = useState(false);
-  console.log("CONTEXT", user);
+
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
       case "name":
@@ -160,9 +160,9 @@ export default function UserProfile() {
         ...formSetting,
       };
 
-      inputForm["name"].value = "";
-      inputForm["address"].value = "";
-      inputForm["phoneNumber"].value = "";
+      inputForm["name"].value = success.user.name;
+      inputForm["address"].value = success.user.profile.address;
+      inputForm["phoneNumber"].value = success.user.profile.phoneNumber;
 
       setFormSetting({
         ...formSetting,
