@@ -16,7 +16,7 @@ const passwordValidator = async (dbPw, userPw) => {
 
 const jwtTokenIssue = (user) => {
   let payload = {
-    id: user.id,
+    _id: user._id,
     name: user.name,
     email: user.email,
     favorites: user.favorites,
@@ -40,10 +40,12 @@ const checkAuthMiddleware = expressJwt({
 });
 
 const findUserIfUserExist = async (req, res, next) => {
-  const { id } = req.auth;
+  const { _id } = req.auth;
 
   try {
-    const foundUser = await User.findById({ _id: id }).select("-__v -password");
+    const foundUser = await User.findById({ _id: _id }).select(
+      "-__v -password"
+    );
     req.profile = foundUser;
     next();
   } catch (e) {
@@ -54,7 +56,7 @@ const findUserIfUserExist = async (req, res, next) => {
 };
 
 const hasAuthorization = (req, res, next) => {
-  const authorized = req.profile && req.auth && req.profile._id == req.auth.id;
+  const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!authorized) {
     return res.status(403).json({
       error: "User is not authorized",

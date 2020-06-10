@@ -96,7 +96,7 @@ module.exports = {
   },
   addToFavorites: async (req, res) => {
     try {
-      let user = await User.findById({ _id: req.body.id });
+      let user = await User.findById({ _id: req.body._id });
       let property = req.params.id;
 
       user.favorites.push(property);
