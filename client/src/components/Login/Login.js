@@ -37,7 +37,7 @@ export default function Login(props) {
 
   useEffect(() => {
     let success = isAuthenticated();
-    console.log(success);
+
     if (success) {
       props.history.push("/map");
     }
@@ -126,8 +126,6 @@ export default function Login(props) {
       let inputForm = {
         ...formSetting,
       };
-
-      console.log("PAY LOAD SUCCESS", success);
 
       inputForm["email"].value = "";
       inputForm["password"].value = "";

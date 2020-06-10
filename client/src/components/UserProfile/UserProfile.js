@@ -48,7 +48,7 @@ export default function UserProfile() {
     },
   });
   const [canSubmit, setCanSubmit] = useState(false);
-
+  console.log("CONTEXT", user);
   const checkInputValidation = (errorState, inputName, inputValue) => {
     switch (inputName) {
       case "name":
@@ -87,7 +87,9 @@ export default function UserProfile() {
 
       case "phoneNumber":
         let validatedNumber;
-        validatedNumber = formSetting.phoneNumber.value.length === 9;
+        validatedNumber =
+          formSetting.phoneNumber.value.length >= 1 &&
+          formSetting.phoneNumber.value.length <= 9;
 
         if (validatedNumber) {
           errorState.phoneNumberError.noError = true;
@@ -145,11 +147,12 @@ export default function UserProfile() {
 
     try {
       let success = await updateUser({
-        _id: user.id,
+        _id: user._id,
         name: name.value,
         profile: {
           address: address.value,
           phoneNumber: phoneNumber.value,
+          creditScore: user.profile.creditScore,
         },
       });
 
