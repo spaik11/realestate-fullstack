@@ -21,11 +21,12 @@ export default function LeafMap({ data, currentCity, addCommas }) {
     Austin: [30.2672, -97.7431],
     Temple: [31.0982, -97.3428],
     Georgetown: [30.6333, -97.678],
+    Pflugerville: [30.4548, -97.6223],
+    Hutto: [30.5427, -97.5467],
+    Wimberley: [29.9974, -98.0986],
   };
 
   let mapCenter = cityCoords[currentCity];
-
-  console.log("active prop", activeProp);
 
   return (
     <Map center={mapCenter ? mapCenter : [30.2672, -97.7431]} zoom={11}>

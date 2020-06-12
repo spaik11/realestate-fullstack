@@ -16,8 +16,10 @@ export const fetchRealEstateData = async (city) => {
 
   try {
     const { data } = await axios.get(changeUrl);
+    let filterList = data.bundle.filter((item) => item.BedroomsTotal !== null);
 
-    return data.bundle;
+    console.log("API CALL", filterList);
+    return filterList;
   } catch (e) {
     throw Error(e.response.data.message);
   }

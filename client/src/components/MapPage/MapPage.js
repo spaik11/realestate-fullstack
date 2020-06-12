@@ -51,7 +51,6 @@ export default class MapPage extends Component {
   render() {
     const { apiProperty, currentCity } = this.state;
     const classes = this.useStyles;
-    console.log("RENDER", this.state);
 
     return (
       <Grid container id="main" className={classes.root} spacing={2}>
