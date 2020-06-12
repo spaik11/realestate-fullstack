@@ -4,6 +4,7 @@
     min-height: 82vh;
     width: 99vw;
     align-items: center;
+    justify-content: center;
 }
 
 #map {

@@ -1,37 +1,38 @@
-import React, { useState, useEffect, useContext } from "react";
-import { CityContext } from "../Context/CityContext";
+import React, { Component } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
 import { fetchRealEstateData } from "../../lib/api/api";
-import texasProperty from "../../lib/api/texas.json";
 import Map from "./Map/Map";
 import "./MapPage.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    justifyContent: "center",
-  },
-}));
-
-export default function MapPage() {
-  const [apiProperty, setApiProperty] = useState([]);
-  const { currentCity } = useContext(CityContext);
-
-  useEffect(() => {
-    // setApiProperty(texasProperty);
-    callApi();
-  }, []);
-
-  const callApi = async () => {
-    let apiData = await fetchRealEstateData();
-    console.log(apiData);
-    setApiProperty(apiData);
+export default class MapPage extends Component {
+  state = {
+    apiProperty: [],
+    currentCity: "",
   };
 
-  const classes = useStyles();
+  async componentDidMount() {
+    const fetchedData = await fetchRealEstateData(this.state.currentCity);
 
-  const addCommas = (nStr) => {
+    this.setState({ apiProperty: fetchedData });
+  }
+
+  cityChangeHandler = async (city) => {
+    const fetchedData = await fetchRealEstateData(city);
+
+    this.setState({ apiProperty: fetchedData, currentCity: city });
+  };
+
+  useStyles = () => {
+    makeStyles(() => ({
+      root: {
+        flexGrow: 1,
+        justifyContent: "center",
+      },
+    }));
+  };
+
+  addCommas = (nStr) => {
     nStr += "";
     let x = nStr.split(".");
     let x1 = x[0];
@@ -43,18 +44,33 @@ export default function MapPage() {
     return x1 + x2;
   };
 
-  return (
-    <Grid container id="main" className={classes.root} spacing={2}>
-      <Grid item id="map">
-        <Map data={apiProperty} city={currentCity} addCommas={addCommas} />
+  setApiProperty = (data) => {
+    this.setState({ apiProperty: data });
+  };
+
+  render() {
+    const { apiProperty, currentCity } = this.state;
+    const classes = this.useStyles;
+    console.log("RENDER", this.state);
+
+    return (
+      <Grid container id="main" className={classes.root} spacing={2}>
+        <Grid item id="map">
+          <Map
+            data={apiProperty}
+            currentCity={currentCity}
+            addCommas={this.addCommas}
+          />
+        </Grid>
+        <Grid item id="sidebar">
+          <Sidebar
+            data={apiProperty}
+            setList={this.setApiProperty}
+            addCommas={this.addCommas}
+            cityChangeHandler={this.cityChangeHandler}
+          />
+        </Grid>
       </Grid>
-      <Grid item id="sidebar">
-        <Sidebar
-          data={apiProperty}
-          setList={setApiProperty}
-          addCommas={addCommas}
-        />
-      </Grid>
-    </Grid>
-  );
+    );
+  }
 }

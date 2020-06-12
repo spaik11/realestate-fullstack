@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   makeStyles,
   ListSubheader,
@@ -9,11 +9,11 @@ import {
   Grid,
 } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import CityPicker from "../CityPicker/CityPicker";
-import "./Sidebar.css";
-import { CityContext } from "../../Context/CityContext";
-import { UserContext } from "../../Context/UserContext";
 import classnames from "classnames";
+import CityPicker from "../CityPicker/CityPicker";
+import { UserContext } from "../../Context/UserContext";
+import { CityContext } from "../../Context/CityContext";
+import "./Sidebar.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,15 +30,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar(props) {
   const classes = useStyles();
-  const [fOpen, setOpenF] = React.useState(false);
-  const [aOpen, setOpenA] = React.useState(false);
+  const [fOpen, setOpenF] = useState(false);
+  const [aOpen, setOpenA] = useState(false);
 
   const {
     isAuth: { user },
   } = useContext(UserContext);
   const { activeProp, setActiveProp } = useContext(CityContext);
-
-  console.log("SIDE BAR", activeProp);
 
   const handleClickFavorites = () => {
     setOpenA(false);
@@ -61,7 +59,10 @@ export default function Sidebar(props) {
 
   return (
     <Grid container id="properties">
-      <CityPicker setList={props.setList} />
+      <CityPicker
+        setList={props.setList}
+        cityChangeHandler={props.cityChangeHandler}
+      />
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
@@ -89,8 +90,10 @@ export default function Sidebar(props) {
                   )}
                   onClick={() => setActiveProp(item)}>
                   <ListItemText
-                    primary={`$${props.addCommas(item.Price)}`}
-                    secondary={`${item.Bedrooms}bed, ${item.Bathrooms}bath, ${item.Living_Area} ${item.Area_Units}`}
+                    primary={`$${props.addCommas(item.ListPrice)}`}
+                    secondary={`${item.BedroomsTotal}bed, ${
+                      item.BathroomsTotalInteger
+                    }bath, ${props.addCommas(item.Living_Area)} Square Feet`}
                   />
                 </ListItem>
               </List>
@@ -115,8 +118,10 @@ export default function Sidebar(props) {
                   )}
                   onClick={() => setActiveProp(item)}>
                   <ListItemText
-                    primary={`$${props.addCommas(item.Price)}`}
-                    secondary={`${item.Bedrooms}bed, ${item.Bathrooms}bath, ${item.Living_Area} ${item.Area_Units}`}
+                    primary={`$${props.addCommas(item.ListPrice)}`}
+                    secondary={`${item.BedroomsTotal} bed, ${
+                      item.BathroomsTotalInteger
+                    } bath, ${props.addCommas(item.LivingArea)} Sq Ft`}
                   />
                 </ListItem>
               </List>
