@@ -10,7 +10,7 @@ export const icon = new Icon({
   iconSize: [25, 25],
 });
 
-export default function LeafMap({ data, currentCity, addCommas }) {
+export default function LeafMap({ data, currentCity, addCommas, modalHandler }) {
   const { activeProp, setActiveProp } = useContext(CityContext);
 
   if (data.length === 0) {
@@ -67,12 +67,7 @@ export default function LeafMap({ data, currentCity, addCommas }) {
               alt=""
             />
             <br />
-            <a
-              href="https://www.trulia.com/"
-              target="_blank"
-              rel="noopener noreferrer">
-              More info
-            </a>
+            <button onClick={modalHandler}>More info</button>
           </div>
         </Popup>
       )}

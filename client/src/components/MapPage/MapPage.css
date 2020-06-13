@@ -11,7 +11,8 @@
     height:82vh; 
     width:66vw; 
     border:1px solid rgb(63, 81, 181, .25); 
-    margin:7px 5px 13px 0px
+    margin:7px 5px 13px 0px;
+    z-index: 1;
 }
 
 #sidebar {
@@ -19,4 +20,8 @@
     width:20vw; 
     border:1px solid rgb(63, 81, 181, .25); 
     margin:7px 0px 13px 5px;
+}
+
+.paper {
+    border: none;
 }
