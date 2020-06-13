@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AddAPhoto } from "@material-ui/icons";
 
 let envKey =
   process.env.NODE_ENV === "development"
@@ -16,7 +17,9 @@ export const fetchRealEstateData = async (city) => {
 
   try {
     const { data } = await axios.get(changeUrl);
-    let filterList = data.bundle.filter((item) => item.BedroomsTotal !== null);
+    let filterList = data.bundle
+      .filter((item) => item.BedroomsTotal !== null)
+      .sort((a, b) => a.ListPrice - b.ListPrice);
 
     console.log("API CALL", filterList);
     return filterList;
@@ -24,26 +27,3 @@ export const fetchRealEstateData = async (city) => {
     throw Error(e.response.data.message);
   }
 };
-
-// const formatData = (obj) => {
-//   const list = [];
-//   obj.forEach((item) => {
-//     list.push({
-//       Price: item.ListPrice,
-//       "Property Type": item.PropertySubType,
-//       Levels: item.Levels,
-//       "Living Area": item.LivingArea,
-//       "Area Units": item.LivingAreaUnits,
-//       "Lot Size": item.LotSizeArea,
-//       "Lot Units": item.LotSizeUnits,
-//       Bedrooms: item.BedroomsTotal,
-//       Bathrooms: item.BathroomsTotalDecimal,
-//       Address: item.UnparsedAddress,
-//       Latitude: item.Latitude,
-//       Longitude: item.Longitude,
-//       ListingKey: item.ListingKey,
-//       Media: item.Media[0].MediaURL,
-//     });
-//   });
-//   return list;
-// };

@@ -39,9 +39,8 @@ export default function LeafMap({ data, currentCity, addCommas, modalHandler }) 
         <Marker
           key={idx}
           position={[property.Latitude, property.Longitude]}
-          onClick={() => {
-            setActiveProp(property);
-          }}
+          onmouseover={() => setActiveProp(property)}
+          riseOnHover
           icon={icon}
         />
       ))}
@@ -55,9 +54,9 @@ export default function LeafMap({ data, currentCity, addCommas, modalHandler }) 
           <div>
             <h2>${addCommas(activeProp.ListPrice)}</h2>
             <p>{activeProp.UnparsedAddress}</p>
-            <p>{`${activeProp.BedroomsTotal}bed, ${
+            <p>{`${activeProp.BedroomsTotal} bed, ${
               activeProp.BathroomsTotalInteger
-            }bath, ${addCommas(activeProp.LivingArea)} Square Feet`}</p>
+            } bath, ${addCommas(activeProp.LivingArea)} Square Feet`}</p>
             <img
               src={
                 activeProp.Media[0].MediaURL

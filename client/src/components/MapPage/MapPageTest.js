@@ -8,7 +8,7 @@ import React, {
 import { CityContext } from "../Context/CityContext";
 import { Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
-import texasProperty from "../../lib/API/texas.json";
+import texasProperty from "../../lib/api/texas.json";
 import Map from "./Map/Map";
 import "./MapPage.css";
 import axios from "axios";
