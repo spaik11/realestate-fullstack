@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
-import { fetchRealEstateData } from "../../lib/api/api";
+import { fetchRealEstateData } from "../../lib/API/api";
+import PropertyModal from "./Modal/PropertyModal";
 import Map from "./Map/Map";
 import "./MapPage.css";
 
@@ -9,6 +10,7 @@ export default class MapPage extends Component {
   state = {
     apiProperty: [],
     currentCity: "",
+    modalOpen: false
   };
 
   async componentDidMount() {
@@ -21,6 +23,10 @@ export default class MapPage extends Component {
     const fetchedData = await fetchRealEstateData(city);
 
     this.setState({ apiProperty: fetchedData, currentCity: city });
+  };
+
+  modalHandler = () => {
+    this.state.modalOpen === true ? this.setState({modalOpen:false}) : this.setState({modalOpen:true});
   };
 
   useStyles = () => {
@@ -54,11 +60,15 @@ export default class MapPage extends Component {
 
     return (
       <Grid container id="main" className={classes.root} spacing={2}>
+      <PropertyModal
+      modalOpen={this.state.modalOpen}
+      modalHandler={this.modalHandler} />
         <Grid item id="map">
           <Map
             data={apiProperty}
             currentCity={currentCity}
             addCommas={this.addCommas}
+            modalHandler={this.modalHandler}
           />
         </Grid>
         <Grid item id="sidebar">
