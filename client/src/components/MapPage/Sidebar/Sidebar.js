@@ -88,7 +88,7 @@ export default function Sidebar(props) {
                       ? classes.activeProperty
                       : null
                   )}
-                  onClick={() => setActiveProp(item)}>
+                  onMouseEnter={() => setActiveProp(item)}>
                   <ListItemText
                     primary={`$${props.addCommas(item.ListPrice)}`}
                     secondary={`${item.BedroomsTotal}bed, ${
@@ -116,7 +116,7 @@ export default function Sidebar(props) {
                       ? classes.activeProperty
                       : null
                   )}
-                  onClick={() => setActiveProp(item)}>
+                  onMouseEnter={() => setActiveProp(item)}>
                   <ListItemText
                     primary={`$${props.addCommas(item.ListPrice)}`}
                     secondary={`${item.BedroomsTotal} bed, ${
