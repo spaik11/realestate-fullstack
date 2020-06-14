@@ -106,3 +106,20 @@ export const deleteFromFave = async (property) => {
     throw Error(e.response.data.message);
   }
 };
+
+export const getAllFavorites = async () => {
+  try {
+    let { data } = await Axios.get("/api/users/all-favorites", {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
+    });
+
+    return data;
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};

@@ -94,25 +94,12 @@ module.exports = {
   },
   addToFavorites: async (req, res) => {
     try {
-      let user = await User.findById({ _id: req.body._id });
+      let user = await User.findById({ _id: req.auth._id });
 
       user.favorites.push(req.body);
-      user.save();
+      let success = await user.save();
 
-      user = user.toObject();
-      delete user.password;
-
-      res.clearCookie("jwt-cookie-expense");
-
-      let jwtToken = jwtTokenIssue(user);
-
-      res.cookie("jwt-cookie-expense", jwtToken, {
-        expires: new Date(Date.now() + 36000 * 60 * 24),
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production" ? true : false,
-      });
-
-      res.json({ user });
+      res.json(success);
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),
@@ -121,29 +108,31 @@ module.exports = {
   },
   deleteFavorite: async (req, res) => {
     try {
-      let user = await User.findById({ _id: req.body._id });
+      let user = await User.findById({ _id: req.auth._id });
 
       let property = user.favorites.find(
         (prop) => prop.ListingKey === req.body.ListingKey
       );
 
       user.favorites.splice(user.favorites.indexOf(property), 1);
-      user.save();
+      let success = await user.save();
 
-      user = user.toObject();
-      delete user.password;
-
-      res.clearCookie("jwt-cookie-expense");
-
-      let jwtToken = jwtTokenIssue(user);
-
-      res.cookie("jwt-cookie-expense", jwtToken, {
-        expires: new Date(Date.now() + 36000 * 60 * 24),
-        httpOnly: false,
-        secure: process.env.NODE_ENV === "production" ? true : false,
+      res.json(success);
+    } catch (e) {
+      res.status(500).json({
+        message: getErrorMessage(e),
       });
+    }
+  },
+  getAllFavorites: async (req, res) => {
+    try {
+      let userID = req.auth._id;
 
-      res.json({ user });
+      let foundAllFavorites = await User.findById({ _id: userID }).select(
+        "-__v -password -userCreated"
+      );
+
+      res.json(foundAllFavorites.favorites);
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),
