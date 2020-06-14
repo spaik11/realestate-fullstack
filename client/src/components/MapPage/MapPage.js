@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
-import { fetchRealEstateData } from "../../lib/API/api";
+import { fetchRealEstateData } from "../../lib/api/api";
 import PropertyModal from "./Modal/PropertyModal";
 import Map from "./Map/Map";
 import "./MapPage.css";
@@ -10,7 +10,7 @@ export default class MapPage extends Component {
   state = {
     apiProperty: [],
     currentCity: "",
-    modalOpen: false
+    modalOpen: false,
   };
 
   async componentDidMount() {
@@ -26,7 +26,9 @@ export default class MapPage extends Component {
   };
 
   modalHandler = () => {
-    this.state.modalOpen === true ? this.setState({modalOpen:false}) : this.setState({modalOpen:true});
+    this.state.modalOpen === true
+      ? this.setState({ modalOpen: false })
+      : this.setState({ modalOpen: true });
   };
 
   useStyles = () => {
