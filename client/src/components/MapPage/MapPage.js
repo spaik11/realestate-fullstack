@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
-import { fetchRealEstateData } from "../../lib/API/api";
+import { fetchRealEstateData } from "../../lib/api/api";
 import PropertyModal from "./Modal/PropertyModal";
 import Map from "./Map/Map";
 import "./MapPage.css";
@@ -11,7 +11,10 @@ export default class MapPage extends Component {
     apiProperty: [],
     currentCity: "",
     modalOpen: false,
+<<<<<<< HEAD
     modalType: ""
+=======
+>>>>>>> c7de117a4bcfa45fa4297ac706b40af565df4b54
   };
 
   async componentDidMount() {
@@ -26,9 +29,16 @@ export default class MapPage extends Component {
     this.setState({ apiProperty: fetchedData, currentCity: city });
   };
 
+<<<<<<< HEAD
   modalHandler = (type) => {
     this.state.modalOpen === true ? this.setState({modalOpen:false}) : this.setState({modalOpen:true});
     this.setState({modalType:type});
+=======
+  modalHandler = () => {
+    this.state.modalOpen === true
+      ? this.setState({ modalOpen: false })
+      : this.setState({ modalOpen: true });
+>>>>>>> c7de117a4bcfa45fa4297ac706b40af565df4b54
   };
 
   useStyles = () => {

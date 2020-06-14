@@ -73,6 +73,7 @@ export const updateUser = async (userInfo) => {
   }
 };
 
+<<<<<<< HEAD
 export const sendMail = async (info) => {
   try {
     let response = await Axios.post("/api/users/sendMail", info,  {
@@ -81,6 +82,55 @@ export const sendMail = async (info) => {
     return response.data;
   } 
   catch (e){
+=======
+export const addToFave = async (property) => {
+  try {
+    let { data } = await Axios.put("/api/users/add-favorites", property, {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
+    });
+
+    return data;
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};
+
+export const deleteFromFave = async (property) => {
+  try {
+    let { data } = await Axios.put("/api/users/delete-favorite", property, {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
+    });
+
+    return data;
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};
+
+export const getAllFavorites = async () => {
+  try {
+    let { data } = await Axios.get("/api/users/all-favorites", {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
+    });
+
+    return data;
+  } catch (e) {
+>>>>>>> c7de117a4bcfa45fa4297ac706b40af565df4b54
     throw Error(e.response.data.message);
   }
 };

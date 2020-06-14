@@ -81,8 +81,6 @@ module.exports = {
           foundUser = foundUser.toObject();
           delete foundUser.password;
 
-          console.log("foundUser: ", foundUser);
-
           res.json({ user: foundUser });
         }
       }
@@ -98,13 +96,45 @@ module.exports = {
   },
   addToFavorites: async (req, res) => {
     try {
-      let user = await User.findById({ _id: req.body._id });
-      let property = req.params.id;
+      let user = await User.findById({ _id: req.auth._id });
 
-      user.favorites.push(property);
-      user.save();
+      user.favorites.push(req.body);
+      let success = await user.save();
 
-      res.json({ message: "Added to favorites!" });
+      res.json(success);
+    } catch (e) {
+      res.status(500).json({
+        message: getErrorMessage(e),
+      });
+    }
+  },
+  deleteFavorite: async (req, res) => {
+    try {
+      let user = await User.findById({ _id: req.auth._id });
+
+      let property = user.favorites.find(
+        (prop) => prop.ListingKey === req.body.ListingKey
+      );
+
+      user.favorites.splice(user.favorites.indexOf(property), 1);
+      let success = await user.save();
+
+      res.json(success);
+    } catch (e) {
+      res.status(500).json({
+        message: getErrorMessage(e),
+      });
+    }
+  },
+  getAllFavorites: async (req, res) => {
+    try {
+      let userID = req.auth._id;
+
+      let foundAllFavorites = await User.findById({ _id: userID }).select(
+        "-__v -password -userCreated"
+      );
+
+      res.json(foundAllFavorites.favorites);
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),

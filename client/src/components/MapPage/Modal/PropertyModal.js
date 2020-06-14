@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import {CityContext} from "../../Context/CityContext";
 import {UserContext} from "../../Context/UserContext";
@@ -8,15 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Modal.css";
 
-
-// const contactHandler = async () => {
-//     const dataToSubmit = {
-//         name:isAuth.user.name,  
-//         email:isAuth.user.email,
-//         property:activeProp.UnparsedAddress 
-//     };
-//     let success = await sendMail(dataToSubmit);
-// }
 
 const PropertyModal = (props) => {
     const { activeProp } = useContext(CityContext);
