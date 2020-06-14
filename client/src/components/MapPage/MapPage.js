@@ -60,9 +60,11 @@ export default class MapPage extends Component {
 
     return (
       <Grid container id="main" className={classes.root} spacing={2}>
-      <PropertyModal
-      modalOpen={this.state.modalOpen}
-      modalHandler={this.modalHandler} />
+        <PropertyModal
+          modalOpen={this.state.modalOpen}
+          modalHandler={this.modalHandler}
+          addCommas={this.addCommas} 
+        />
         <Grid item id="map">
           <Map
             data={apiProperty}

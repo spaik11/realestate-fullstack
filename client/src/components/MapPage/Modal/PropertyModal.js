@@ -16,8 +16,12 @@ const PropertyModal = (props) => {
         className="modal"
     >
     {activeProp && <h3 className="modal__title">{activeProp.UnparsedAddress}</h3>}
+    <br />
+    {activeProp && <h4 className="modal__subTitle">{`$${props.addCommas(activeProp.ListPrice)}`}</h4>}
     {activeProp && <p className="modal__body">{activeProp.PublicRemarks}</p>}
+    <br />
     <div id="btnDiv">
+        <Button className="modal__button" >Contact Broker</Button>
         <Button className="modal__button" onClick={props.modalHandler}>Close</Button>
     </div>
     </Modal>
