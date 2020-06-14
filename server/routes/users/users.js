@@ -12,6 +12,7 @@ const {
   logout,
   addToFavorites,
   updateProfile,
+  sendMail
 } = require("./controllers/userController");
 
 router.post("/create-user", createUser);
@@ -26,5 +27,7 @@ router.put(
   hasAuthorization,
   updateProfile
 );
+
+router.post("/sendMail", sendMail);
 
 module.exports = router;

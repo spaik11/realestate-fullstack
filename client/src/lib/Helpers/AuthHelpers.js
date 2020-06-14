@@ -72,3 +72,15 @@ export const updateUser = async (userInfo) => {
     throw Error(e.response.data.message);
   }
 };
+
+export const sendMail = async (info) => {
+  try {
+    let response = await Axios.post("/api/users/sendMail", info,  {
+      withCredentials: true});
+    console.log(response);
+    return response.data;
+  } 
+  catch (e){
+    throw Error(e.response.data.message);
+  }
+};

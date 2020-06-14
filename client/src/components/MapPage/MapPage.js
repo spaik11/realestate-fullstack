@@ -10,7 +10,8 @@ export default class MapPage extends Component {
   state = {
     apiProperty: [],
     currentCity: "",
-    modalOpen: false
+    modalOpen: false,
+    modalType: ""
   };
 
   async componentDidMount() {
@@ -25,8 +26,9 @@ export default class MapPage extends Component {
     this.setState({ apiProperty: fetchedData, currentCity: city });
   };
 
-  modalHandler = () => {
+  modalHandler = (type) => {
     this.state.modalOpen === true ? this.setState({modalOpen:false}) : this.setState({modalOpen:true});
+    this.setState({modalType:type});
   };
 
   useStyles = () => {
@@ -62,6 +64,7 @@ export default class MapPage extends Component {
       <Grid container id="main" className={classes.root} spacing={2}>
         <PropertyModal
           modalOpen={this.state.modalOpen}
+          modalType={this.state.modalType}
           modalHandler={this.modalHandler}
           addCommas={this.addCommas} 
         />
