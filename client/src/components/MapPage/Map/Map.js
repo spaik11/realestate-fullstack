@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CityContext } from "../../Context/CityContext";
-import { UserContext } from "../../Context/UserContext";
+import { FavoritesContext } from "../../Context/FavoritesContext";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import Spinner from "../../Spinner/Spinner";
 import { addToFave } from "../../../lib/Helpers/AuthHelpers";
@@ -21,7 +21,7 @@ export default function LeafMap({
   modalHandler,
 }) {
   const { activeProp, setActiveProp } = useContext(CityContext);
-  const { isAuth: user, dispatch } = useContext(UserContext);
+  const { favoritesDispatch } = useContext(FavoritesContext);
 
   if (data.length === 0) {
     return <Spinner />;
@@ -52,11 +52,10 @@ export default function LeafMap({
       Media,
       PublicRemarks,
     },
-    dispatch
+    favoritesDispatch
   ) => {
     try {
       let success = await addToFave({
-        _id: user.user._id,
         City,
         ListPrice,
         UnparsedAddress,
@@ -70,9 +69,9 @@ export default function LeafMap({
         PublicRemarks,
       });
 
-      dispatch({
-        type: "UPDATE_USER",
-        payload: success.user,
+      favoritesDispatch({
+        type: "ADD_FAVORITE",
+        payload: success.favorites,
       });
 
       toast.success(`Added to Favorites!`, {
@@ -148,7 +147,8 @@ export default function LeafMap({
               />
               <br />
               <button onClick={modalHandler}>More info</button>
-              <button onClick={() => handleFaveSubmit(activeProp, dispatch)}>
+              <button
+                onClick={() => handleFaveSubmit(activeProp, favoritesDispatch)}>
                 Add To Favorites
               </button>
             </div>

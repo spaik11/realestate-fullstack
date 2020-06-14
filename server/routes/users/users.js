@@ -12,6 +12,7 @@ const {
   logout,
   addToFavorites,
   deleteFavorite,
+  getAllFavorites,
   updateProfile,
 } = require("./controllers/userController");
 
@@ -26,6 +27,13 @@ router.put(
   updateProfile
 );
 
+router.get(
+  "/all-favorites",
+  checkAuthMiddleware,
+  findUserIfUserExist,
+  hasAuthorization,
+  getAllFavorites
+);
 router.put(
   "/add-favorites",
   checkAuthMiddleware,

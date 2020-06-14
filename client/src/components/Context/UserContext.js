@@ -27,6 +27,7 @@ export class Provider extends Component {
   };
 
   render() {
+    console.log("CONTEXT STATE", this.state.isAuth.user);
     return (
       <UserContext.Provider value={this.state}>
         {this.props.children}

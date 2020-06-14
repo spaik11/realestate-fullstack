@@ -11,7 +11,7 @@ import {
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import classnames from "classnames";
 import CityPicker from "../CityPicker/CityPicker";
-import { UserContext } from "../../Context/UserContext";
+import { FavoritesContext } from "../../Context/FavoritesContext";
 import { CityContext } from "../../Context/CityContext";
 import "./Sidebar.css";
 
@@ -33,9 +33,7 @@ export default function Sidebar(props) {
   const [fOpen, setOpenF] = useState(false);
   const [aOpen, setOpenA] = useState(false);
 
-  const {
-    isAuth: { user },
-  } = useContext(UserContext);
+  const { favorites } = useContext(FavoritesContext);
   const { activeProp, setActiveProp } = useContext(CityContext);
 
   const handleClickFavorites = () => {
@@ -78,7 +76,7 @@ export default function Sidebar(props) {
         </ListItem>
         <Grid item id="favList">
           <Collapse in={fOpen} timeout={0} unmountOnExit>
-            {user.favorites.map((item, idx) => (
+            {favorites.map((item, idx) => (
               <List key={idx} component="div" disablePadding>
                 <ListItem
                   button
