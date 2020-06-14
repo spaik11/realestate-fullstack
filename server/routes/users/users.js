@@ -11,20 +11,35 @@ const {
   login,
   logout,
   addToFavorites,
+  deleteFavorite,
   updateProfile,
 } = require("./controllers/userController");
 
 router.post("/create-user", createUser);
 router.post("/login", login);
 router.get("/logout", logout);
-
-router.put("/add-favorites", addToFavorites);
 router.put(
   "/update-profile",
   checkAuthMiddleware,
   findUserIfUserExist,
   hasAuthorization,
   updateProfile
+);
+
+router.put(
+  "/add-favorites",
+  checkAuthMiddleware,
+  findUserIfUserExist,
+  hasAuthorization,
+  addToFavorites
+);
+
+router.delete(
+  "/delete-favorite",
+  checkAuthMiddleware,
+  findUserIfUserExist,
+  hasAuthorization,
+  deleteFavorite
 );
 
 module.exports = router;

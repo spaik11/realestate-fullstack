@@ -72,3 +72,27 @@ export const updateUser = async (userInfo) => {
     throw Error(e.response.data.message);
   }
 };
+
+export const addToFave = async (property) => {
+  try {
+    let { data } = await Axios.put("/api/users/add-favorites", property, {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
+    });
+
+    return data;
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};
+
+export const deleteFromFave = async (property) => {
+  try {
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};

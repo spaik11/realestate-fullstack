@@ -8,6 +8,8 @@ const reducer = (state, action) => {
       return { ...state, isAuth: { user: action.payload, auth: true } };
     case "SUCCESS_SIGNED_OUT":
       return { ...state, isAuth: { user: null, auth: false } };
+    case "UPDATE_USER":
+      return { ...state, isAuth: { user: action.payload, auth: true } };
     default:
       return state;
   }
