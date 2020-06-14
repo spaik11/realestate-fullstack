@@ -49,6 +49,7 @@ export default function LeafMap({
       Latitude,
       Longitude,
       Media,
+      PublicRemarks,
     },
     dispatch
   ) => {
@@ -64,6 +65,7 @@ export default function LeafMap({
         Latitude,
         Longitude,
         Media: [Media[0]],
+        PublicRemarks,
       });
 
       dispatch({

@@ -92,6 +92,16 @@ export const addToFave = async (property) => {
 
 export const deleteFromFave = async (property) => {
   try {
+    let { data } = await Axios.put("/api/users/delete-favorite", property, {
+      withCredentials: true,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + isAuthenticated(),
+      },
+    });
+
+    return data;
   } catch (e) {
     throw Error(e.response.data.message);
   }
