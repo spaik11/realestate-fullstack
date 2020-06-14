@@ -104,7 +104,7 @@ module.exports = {
       user = user.toObject();
       delete user.password;
 
-      await res.clearCookie("jwt-cookie-expense");
+      res.clearCookie("jwt-cookie-expense");
 
       let jwtToken = jwtTokenIssue(user);
 
