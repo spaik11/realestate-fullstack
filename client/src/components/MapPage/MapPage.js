@@ -65,6 +65,7 @@ export default class MapPage extends Component {
         <PropertyModal
           modalOpen={this.state.modalOpen}
           modalHandler={this.modalHandler}
+          addCommas={this.addCommas} 
         />
         <Grid item id="map">
           <Map

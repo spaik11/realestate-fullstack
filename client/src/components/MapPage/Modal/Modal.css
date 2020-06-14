@@ -18,12 +18,10 @@
     opacity: 0;
 }
 
-
-
 .modal {
     background-color: whitesmoke;
     width: 50vw;
-    max-height: 60vh;
+    max-height: 80vh;
     padding: 30px;
     outline: none;
     border: 2px solid rgb(158, 167, 218);
@@ -35,6 +33,11 @@
     text-align: center;
 }
 
+.modal__subTitle {
+    font-size: 22px;
+    text-align: center;
+}
+
 .modal__body {
     margin: 15px;
 
@@ -42,9 +45,11 @@
 
 .modal__button {
     background-color: rgb(158, 167, 218, 0.5);
+    margin: 5px;
 }
 
 #btnDiv {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
