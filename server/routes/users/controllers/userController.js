@@ -97,12 +97,55 @@ module.exports = {
   addToFavorites: async (req, res) => {
     try {
       let user = await User.findById({ _id: req.body._id });
-      let property = req.params.id;
 
-      user.favorites.push(property);
+      user.favorites.push(req.body);
       user.save();
 
-      res.json({ message: "Added to favorites!" });
+      user = user.toObject();
+      delete user.password;
+
+      await res.clearCookie("jwt-cookie-expense");
+
+      let jwtToken = jwtTokenIssue(user);
+
+      res.cookie("jwt-cookie-expense", jwtToken, {
+        expires: new Date(Date.now() + 36000 * 60 * 24),
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+      });
+
+      res.json({ user });
+    } catch (e) {
+      res.status(500).json({
+        message: getErrorMessage(e),
+      });
+    }
+  },
+  deleteFavorite: async (req, res) => {
+    try {
+      let user = await User.findById({ _id: req.body._id });
+
+      let property = user.favorites.find(
+        (prop) => prop.ListingKey === req.body.ListingKey
+      );
+
+      user.favorites.splice(user.favorites.indexOf(property), 1);
+      user.save();
+
+      user = user.toObject();
+      delete user.password;
+
+      res.clearCookie("jwt-cookie-expense");
+
+      let jwtToken = jwtTokenIssue(user);
+
+      res.cookie("jwt-cookie-expense", jwtToken, {
+        expires: new Date(Date.now() + 36000 * 60 * 24),
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production" ? true : false,
+      });
+
+      res.json({ user: user });
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),

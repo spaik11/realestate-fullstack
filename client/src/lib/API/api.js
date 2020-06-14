@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AddAPhoto } from "@material-ui/icons";
 
 let envKey =
   process.env.NODE_ENV === "development"
@@ -21,7 +20,6 @@ export const fetchRealEstateData = async (city) => {
       .filter((item) => item.BedroomsTotal !== null)
       .sort((a, b) => a.ListPrice - b.ListPrice);
 
-    console.log("API CALL", filterList);
     return filterList;
   } catch (e) {
     throw Error(e.response.data.message);

@@ -91,9 +91,9 @@ export default function Sidebar(props) {
                   onMouseEnter={() => setActiveProp(item)}>
                   <ListItemText
                     primary={`$${props.addCommas(item.ListPrice)}`}
-                    secondary={`${item.BedroomsTotal}bed, ${
+                    secondary={`${item.BedroomsTotal} bed, ${
                       item.BathroomsTotalInteger
-                    }bath, ${props.addCommas(item.Living_Area)} Square Feet`}
+                    } bath, ${props.addCommas(item.LivingArea)} Square Feet`}
                   />
                 </ListItem>
               </List>
