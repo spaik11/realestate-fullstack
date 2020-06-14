@@ -79,8 +79,6 @@ module.exports = {
           foundUser = foundUser.toObject();
           delete foundUser.password;
 
-          console.log("foundUser: ", foundUser);
-
           res.json({ user: foundUser });
         }
       }
@@ -145,7 +143,7 @@ module.exports = {
         secure: process.env.NODE_ENV === "production" ? true : false,
       });
 
-      res.json({ user: user });
+      res.json({ user });
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),

@@ -40,6 +40,7 @@ export default function LeafMap({
 
   const handleFaveSubmit = async (
     {
+      City,
       ListPrice,
       UnparsedAddress,
       BedroomsTotal,
@@ -56,6 +57,7 @@ export default function LeafMap({
     try {
       let success = await addToFave({
         _id: user.user._id,
+        City,
         ListPrice,
         UnparsedAddress,
         BedroomsTotal,
