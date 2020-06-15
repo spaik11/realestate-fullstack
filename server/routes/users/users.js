@@ -14,6 +14,7 @@ const {
   deleteFavorite,
   getAllFavorites,
   updateProfile,
+  sendMail
 } = require("./controllers/userController");
 
 router.post("/create-user", createUser);
@@ -27,6 +28,9 @@ router.put(
   updateProfile
 );
 
+<<<<<<< HEAD
+router.post("/sendMail", sendMail);
+=======
 router.get(
   "/all-favorites",
   checkAuthMiddleware,
@@ -49,5 +53,6 @@ router.delete(
   hasAuthorization,
   deleteFavorite
 );
+>>>>>>> c7de117a4bcfa45fa4297ac706b40af565df4b54
 
 module.exports = router;
