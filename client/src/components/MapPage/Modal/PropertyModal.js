@@ -8,7 +8,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Modal.css";
 
-
 const PropertyModal = (props) => {
     const { activeProp } = useContext(CityContext);
     const { isAuth } = useContext(UserContext);

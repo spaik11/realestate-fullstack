@@ -98,10 +98,18 @@ module.exports = {
     try {
       let user = await User.findById({ _id: req.auth._id });
 
-      user.favorites.push(req.body);
-      let success = await user.save();
+      let property = user.favorites.some(
+        (prop) => prop.ListingKey === req.body.ListingKey
+      );
 
-      res.json(success);
+      if (property) {
+        res.json({ message: "Property is already in favorites" });
+      } else {
+        user.favorites.push(req.body);
+        let success = await user.save();
+
+        res.json(success);
+      }
     } catch (e) {
       res.status(500).json({
         message: getErrorMessage(e),
