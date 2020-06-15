@@ -180,7 +180,7 @@ export default function Login(props) {
         key={idx}
         name={name}
         value={value}
-        type="text"
+        type={name === "password" ? "password" : "text"}
         placeholder={placeholder}
         onChange={handleChange}
         error={error}
