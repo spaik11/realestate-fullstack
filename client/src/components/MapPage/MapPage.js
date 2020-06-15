@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
-import { fetchRealEstateData } from "../../lib/API/api";
+import { fetchRealEstateData } from "../../lib/api/api";
 import PropertyModal from "./Modal/PropertyModal";
 import Map from "./Map/Map";
 import "./MapPage.css";
