@@ -85,7 +85,10 @@ export default function Sidebar(props) {
                     activeProp && activeProp.ListingKey === item.ListingKey
                       ? classes.activeProperty
                       : null
-                  )}>
+                  )}
+                  onMouseEnter={() => props.setFaveItem(item)}
+                  onClick={props.modalHandler}
+                  >
                   <ListItemText
                     primary={`${item.City} - $${props.addCommas(
                       item.ListPrice
