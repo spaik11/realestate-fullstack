@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { CityContext } from "../../Context/CityContext";
 import { FavoritesContext } from "../../Context/FavoritesContext";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
@@ -21,7 +21,7 @@ export default function LeafMap({
   modalHandler,
 }) {
   const { activeProp, setActiveProp } = useContext(CityContext);
-  const { favoritesDispatch } = useContext(FavoritesContext);
+  const { favorites, favoritesDispatch } = useContext(FavoritesContext);
 
   if (data.length === 0) {
     return <Spinner />;
@@ -55,34 +55,46 @@ export default function LeafMap({
     favoritesDispatch
   ) => {
     try {
-      let success = await addToFave({
-        City,
-        ListPrice,
-        UnparsedAddress,
-        BedroomsTotal,
-        BathroomsTotalInteger,
-        LivingArea,
-        ListingKey,
-        Latitude,
-        Longitude,
-        Media: [Media[0]],
-        PublicRemarks,
-      });
+      if (favorites.some((prop) => prop.ListingKey === ListingKey)) {
+        toast.error("This property is already in your favorites", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        let success = await addToFave({
+          City,
+          ListPrice,
+          UnparsedAddress,
+          BedroomsTotal,
+          BathroomsTotalInteger,
+          LivingArea,
+          ListingKey,
+          Latitude,
+          Longitude,
+          Media: [Media[0]],
+          PublicRemarks,
+        });
 
-      favoritesDispatch({
-        type: "ADD_FAVORITE",
-        payload: success.favorites,
-      });
+        favoritesDispatch({
+          type: "ADD_FAVORITE",
+          payload: success.favorites,
+        });
 
-      toast.success(`Added to Favorites!`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+        toast.success(`Added to Favorites!`, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } catch (err) {
       toast.error(err.message, {
         position: "top-center",
@@ -146,11 +158,15 @@ export default function LeafMap({
                 alt=""
               />
               <br />
-              <button onClick={modalHandler}>More info</button>
-              <button
-                onClick={() => handleFaveSubmit(activeProp, favoritesDispatch)}>
-                Add To Favorites
-              </button>
+              <div className="marker-buttons">
+                <button onClick={modalHandler}>More info</button>
+                <button
+                  onClick={() =>
+                    handleFaveSubmit(activeProp, favoritesDispatch)
+                  }>
+                  Add To Favorites
+                </button>
+              </div>
             </div>
           </Popup>
         )}

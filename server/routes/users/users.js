@@ -42,12 +42,4 @@ router.put(
   addToFavorites
 );
 
-router.delete(
-  "/delete-favorite",
-  checkAuthMiddleware,
-  findUserIfUserExist,
-  hasAuthorization,
-  deleteFavorite
-);
-
 module.exports = router;
