@@ -149,14 +149,16 @@ export default function LeafMap({
               <p>{`${activeProp.BedroomsTotal} bed, ${
                 activeProp.BathroomsTotalInteger
               } bath, ${addCommas(activeProp.LivingArea)} Square Feet`}</p>
-              <img
-                src={
-                  activeProp.Media[0].MediaURL
-                    ? activeProp.Media[0].MediaURL
-                    : null
-                }
-                alt=""
-              />
+              {activeProp.Media ? (
+                <img
+                  src={
+                    activeProp.Media[0].MediaURL
+                      ? activeProp.Media[0].MediaURL
+                      : null
+                  }
+                  alt=""
+                />
+              ) : null}
               <br />
               <div className="marker-buttons">
                 <button onClick={modalHandler}>More info</button>
