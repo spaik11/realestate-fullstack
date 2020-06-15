@@ -34,14 +34,25 @@ const PropertyModal = (props) => {
         {activeProp && (
           <h3 className="modal__title">{activeProp.UnparsedAddress}</h3>
         )}
+        {props.faveItem && (
+          <h3 className="modal__title">{props.faveItem.UnparsedAddress}</h3>
+        )}
         <br />
         {activeProp && (
           <h4 className="modal__subTitle">{`$${props.addCommas(
             activeProp.ListPrice
           )}`}</h4>
         )}
+        {props.faveItem && (
+          <h4 className="modal__subTitle">{`$${props.addCommas(
+            props.faveItem.ListPrice
+          )}`}</h4>
+        )}
         {activeProp && (
           <p className="modal__body">{activeProp.PublicRemarks}</p>
+        )}
+        {props.faveItem && (
+          <p className="modal__body">{props.faveItem.PublicRemarks}</p>
         )}
         <br />
         <div id="btnDiv">
