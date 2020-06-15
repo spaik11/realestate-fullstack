@@ -14,6 +14,7 @@ const {
   deleteFavorite,
   getAllFavorites,
   updateProfile,
+  sendMail
 } = require("./controllers/userController");
 
 router.post("/create-user", createUser);
@@ -26,6 +27,8 @@ router.put(
   hasAuthorization,
   updateProfile
 );
+
+router.post("/sendMail", sendMail);
 
 router.get(
   "/all-favorites",
@@ -40,6 +43,14 @@ router.put(
   findUserIfUserExist,
   hasAuthorization,
   addToFavorites
+);
+
+router.delete(
+  "/delete-favorite",
+  checkAuthMiddleware,
+  findUserIfUserExist,
+  hasAuthorization,
+  deleteFavorite
 );
 
 module.exports = router;
