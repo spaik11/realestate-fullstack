@@ -209,15 +209,7 @@ export default function Register(props) {
 
       setCheckBox(false);
 
-      toast.success(`Congrats, Your Credit Score is ${randomCreditScore}`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      props.history.push("/map");
     } catch (err) {
       toast.error(err.message, {
         position: "top-center",
@@ -289,7 +281,7 @@ export default function Register(props) {
                         name="checkBox"
                       />
                     }
-                    label="I agree to the terms of service of a credit check"
+                    label="I agree to the terms of service"
                   />
                 </FormGroup>
               </FormControl>
