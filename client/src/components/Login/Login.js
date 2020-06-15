@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import validator from "validator";
-import { loginUser, isAuthenticated } from "../../lib/Helpers/AuthHelpers";
+import {
+  loginUser,
+  isAuthenticated,
+  getAllFavorites,
+} from "../../lib/Helpers/AuthHelpers";
 import InputGroup from "../shared/InputGroup";
 import ButtonGroup from "../shared/ButtonGroup";
 import { Consumer } from "../Context/UserContext";
+import { FavoritesContext } from "../Context/FavoritesContext";
 import "react-toastify/dist/ReactToastify.css";
 import "./Login.css";
 
@@ -34,6 +39,7 @@ export default function Login(props) {
     },
   });
   const [canSubmit, setCanSubmit] = useState(false);
+  const { favoritesDispatch } = useContext(FavoritesContext);
 
   useEffect(() => {
     let success = isAuthenticated();
@@ -133,6 +139,13 @@ export default function Login(props) {
       dispatch({
         type: "SUCCESS_SIGNED_IN",
         payload: success.user,
+      });
+
+      let results = await getAllFavorites();
+
+      favoritesDispatch({
+        type: "GET_ALL_FAVORITES",
+        payload: results,
       });
 
       setFormSetting({

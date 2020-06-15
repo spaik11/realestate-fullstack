@@ -177,29 +177,29 @@ module.exports = {
     }
   },
   sendMail: (req, res) => {
-    const {name, email, property} = req.body
-      const smtpTransport = mailer.createTransport({
-          service: "Gmail",
-          auth: {
-              user: "truzillow@gmail.com",
-              pass: "abcD123!"
-          }
-      });
-  
-      let mail = {
-          from: "Truzillow Admin <truzillow@gmail.com>",
-          to: "paul.garay@codeimmersives.com",
-          subject: property,
-          html: `${name} would like more information on ${property}. Please reply to ${email}`
+    const { name, email, property } = req.body;
+    const smtpTransport = mailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "truzillow@gmail.com",
+        pass: "abcD123!",
+      },
+    });
+
+    let mail = {
+      from: "Truzillow Admin <truzillow@gmail.com>",
+      to: "paul.garay@codeimmersives.com",
+      subject: property,
+      html: `${name} would like more information on ${property}. Please reply to ${email}`,
+    };
+
+    smtpTransport.sendMail(mail, function (error, response) {
+      if (error) {
+        res.status(500).json({ message: "email not sent" });
+      } else {
+        res.status(200).json({ message: "Email sent" });
       }
-  
-      smtpTransport.sendMail(mail, function (error, response){
-          if(error){
-              res.status(500).json({message:"email not sent"})
-          } else {
-              res.status(200).json({message:"Email sent"})
-          };
-          smtpTransport.close();
-      })
-  }
+      smtpTransport.close();
+    });
+  },
 };

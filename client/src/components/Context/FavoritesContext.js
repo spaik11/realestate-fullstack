@@ -15,13 +15,11 @@ const reducer = (state, action) => {
         ...state,
         favorites: [...action.payload],
       };
-    // case "DELETE_BY_ID":
-    //   return {
-    //     ...state,
-    //     favorites: state.FavoritesArray.filter(
-    //       (item) => item._id !== action.payload._id
-    //     ),
-    //   };
+    case "CLEAR_FAVORITES":
+      return {
+        ...state,
+        favorites: [],
+      };
     default:
       return state;
   }

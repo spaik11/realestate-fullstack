@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { FavoritesContext } from "../Context/FavoritesContext";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../lib/Helpers/AuthHelpers";
 import { Button, Menu, MenuItem } from "@material-ui/core";
 
 export default function AuthHeader(props) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { favoritesDispatch } = useContext(FavoritesContext);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -18,6 +20,9 @@ export default function AuthHeader(props) {
       await logout();
       props.dispatch({
         type: "SUCCESS_SIGNED_OUT",
+      });
+      favoritesDispatch({
+        type: "CLEAR_FAVORITES",
       });
     } catch (e) {
       console.log(e);
