@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { makeStyles, Grid } from "@material-ui/core";
 import Sidebar from "./Sidebar/Sidebar";
-import { fetchRealEstateData } from "../../lib/API/api";
+import { fetchRealEstateData } from "../../lib/api/api";
 import PropertyModal from "./Modal/PropertyModal";
 import Map from "./Map/Map";
 import "./MapPage.css";
@@ -11,7 +11,7 @@ export default class MapPage extends Component {
     apiProperty: [],
     currentCity: "",
     modalOpen: false,
-    faveItem: null
+    faveItem: null,
   };
 
   async componentDidMount() {
@@ -33,8 +33,8 @@ export default class MapPage extends Component {
   };
 
   setFaveItem = (item) => {
-    this.setState({faveItem:item})
-  }
+    this.setState({ faveItem: item });
+  };
 
   useStyles = () => {
     makeStyles(() => ({
@@ -72,7 +72,7 @@ export default class MapPage extends Component {
           modalType={this.state.modalType}
           modalHandler={this.modalHandler}
           faveItem={this.state.faveItem}
-          addCommas={this.addCommas} 
+          addCommas={this.addCommas}
         />
         <Grid item id="map">
           <Map

@@ -49,7 +49,6 @@ export class FavoritesProvider extends Component {
   }
 
   render() {
-    console.log("FAVORITES", this.state.favorites);
     return (
       <FavoritesContext.Provider value={this.state}>
         {this.props.children}
