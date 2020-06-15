@@ -31,14 +31,14 @@ const PropertyModal = (props) => {
         appElement={document.querySelector("#main")}
         closeTimeoutMS={200}
         className="modal">
-        {activeProp && (
+        {activeProp && !props.faveItem &&(
           <h3 className="modal__title">{activeProp.UnparsedAddress}</h3>
         )}
         {props.faveItem && (
           <h3 className="modal__title">{props.faveItem.UnparsedAddress}</h3>
         )}
         <br />
-        {activeProp && (
+        {activeProp && !props.faveItem && (
           <h4 className="modal__subTitle">{`$${props.addCommas(
             activeProp.ListPrice
           )}`}</h4>
@@ -48,7 +48,7 @@ const PropertyModal = (props) => {
             props.faveItem.ListPrice
           )}`}</h4>
         )}
-        {activeProp && (
+        {activeProp && !props.faveItem && (
           <p className="modal__body">{activeProp.PublicRemarks}</p>
         )}
         {props.faveItem && (
@@ -62,7 +62,7 @@ const PropertyModal = (props) => {
               const dataToSubmit = {
                 name: isAuth.user.name,
                 email: isAuth.user.email,
-                property: activeProp.UnparsedAddress,
+                property: props.faveItem !== null ? props.faveItem.UnparsedAddress : activeProp.UnparsedAddress,
               };
               let success = await sendMail(dataToSubmit);
               toast.success("Email sent, broker will contact you shortly.", {
