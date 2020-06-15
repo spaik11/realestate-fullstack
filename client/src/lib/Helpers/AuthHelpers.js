@@ -73,16 +73,18 @@ export const updateUser = async (userInfo) => {
   }
 };
 
-<<<<<<< HEAD
 export const sendMail = async (info) => {
   try {
-    let response = await Axios.post("/api/users/sendMail", info,  {
-      withCredentials: true});
-    console.log(response);
+    let response = await Axios.post("/api/users/sendMail", info, {
+      withCredentials: true,
+    });
+
     return response.data;
-  } 
-  catch (e){
-=======
+  } catch (e) {
+    throw Error(e.response.data.message);
+  }
+};
+
 export const addToFave = async (property) => {
   try {
     let { data } = await Axios.put("/api/users/add-favorites", property, {
@@ -130,7 +132,6 @@ export const getAllFavorites = async () => {
 
     return data;
   } catch (e) {
->>>>>>> c7de117a4bcfa45fa4297ac706b40af565df4b54
     throw Error(e.response.data.message);
   }
 };

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { CityContext } from "../../Context/CityContext";
 import { FavoritesContext } from "../../Context/FavoritesContext";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
